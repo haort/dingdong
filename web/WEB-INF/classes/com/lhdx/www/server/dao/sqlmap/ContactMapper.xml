@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lhdx.www.server.dao.ContactDao">
+
+	<insert id="addContact" parameterType="java.util.HashMap">
+		insert into
+		contact( name, phone, wenti, wxId,xiaoqu,flag,createTime,rep,addr) values
+		(#{contact.name}, #{contact.phone}, #{contact.wenti}, #{contact.wxId},#{contact.xiaoqu},#{contact.flag},#{contact.createTime},#{contact.rep},#{contact.addr})
+	</insert>
+	
+	<select id="selectContactsByXiaoqu" resultMap="contactMap"
+		parameterType="java.util.HashMap">
+		select  id,name, phone, wenti, xiaoqu,createTime,flag,rep,addr from contact where xiaoqu =
+		#{xiaoqu} and flag in ("未处理","正在处理") 
+		order by id desc;
+	</select>
+	
+	<select id="selectContactsByAdmin" resultMap="contactMap"
+		parameterType="java.util.HashMap">
+		select  id,name, phone, wenti, xiaoqu,createTime,flag,rep,addr from contact where xiaoqu =
+		#{xiaoqu} and flag != "未处理" 
+		order by id desc;
+	</select>
+	
+	<select id="selectContactsById" resultMap="contactMap"
+		parameterType="java.util.HashMap">
+		select  id,name, phone, wenti, xiaoqu,createTime,flag,rep,addr from contact where wxId =
+		#{wxId} and rep = "未评价"
+		order by id desc;
+	</select>
+	
+	<update id="updateContactById" parameterType="java.util.HashMap">
+		update contact set
+		flag = #{flag}
+		where id = #{id}
+    </update>
+    
+    <update id="replyContactById" parameterType="java.util.HashMap">
+		update contact set
+		rep = #{rep}
+		where id = #{id}
+    </update>
+	
+	<resultMap type="Contact" id="contactMap">
+		<id property="id" column="id" />
+		<result property="addr" column="addr" />
+		<result property="name" column="name" />
+		<result property="phone" column="phone" />
+		<result property="wenti" column="wenti" />
+		<result property="wxId" column="wxId" />
+		<result property="xiaoqu" column="xiaoqu" />
+		<result property="flag" column="flag" />
+		<result property="rep" column="rep" />
+		<result property="createTime" column="createTime"/>
+	</resultMap>
+	
+</mapper>

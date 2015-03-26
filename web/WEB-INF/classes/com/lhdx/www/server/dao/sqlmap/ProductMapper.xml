@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lhdx.www.server.dao.ProductDao">
+
+	<select id="selectProducts" parameterType="java.util.HashMap"   resultMap="productMap"  >
+	   select productId, productPic, productName, productScore,num
+	   from product
+	   where num != 0
+	   order by productId desc
+	</select> 
+
+	<select id="selectProductById" parameterType="java.util.HashMap"   resultMap="productMap"  >
+	   select productId, productPic, productName, productScore,productDes,num
+	   from product
+	   where productId =  #{productId}
+	   order by productId desc
+	</select> 
+	
+	<update id="updateNum" parameterType="java.util.HashMap">
+		update product set
+		num = #{num}
+		where productId = #{productId}
+    </update>
+	
+	<resultMap type="Product" id="productMap">
+		<id property="productId" column="productId" />
+		<result property="productPic" column="productPic" />
+		<result property="productName" column="productName" />
+		<result property="productScore" column="productScore" />
+		<result property="productDes" column="productDes" />
+		<result property="num" column="num" />
+	</resultMap>
+	
+</mapper>

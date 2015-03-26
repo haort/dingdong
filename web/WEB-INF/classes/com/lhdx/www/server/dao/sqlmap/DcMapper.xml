@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lhdx.www.server.dao.DcDao">
+
+	<insert id="addDc" parameterType="java.util.HashMap">
+		insert into
+		dc( q1, q2, q3, q4,q5,q6,q7,otherq,wxId) values
+		(#{dc.q1}, #{dc.q2}, #{dc.q3}, #{dc.q4}, #{dc.q5},#{dc.q6},#{dc.q7},#{dc.otherq},#{dc.wxId})
+	</insert>
+	
+	<select id="findDcByWxId" parameterType="java.util.HashMap"   resultMap="dcMap"  >
+	   select id, q1, q2, q3,q4,q5,q6,q7,otherq,wxId
+	   from dc
+	   where wxId = #{wxId}
+	   order by id desc limit 0,1 ;
+	</select> 
+	
+	<resultMap type="Dc" id="dcMap">
+		<id property="id" column="id" />
+		<result property="q1" column="q1" />
+		<result property="q2" column="q2" />
+		<result property="q3" column="q3" />
+		<result property="q4" column="q4" />
+		<result property="q5" column="q5" />
+		<result property="q6" column="q6" />
+		<result property="q7" column="q7" />
+		<result property="otherq" column="otherq" />
+		<result property="wxId" column="wxId" />
+	</resultMap>
+	
+</mapper>

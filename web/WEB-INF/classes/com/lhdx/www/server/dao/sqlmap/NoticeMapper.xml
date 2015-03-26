@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lhdx.www.server.dao.NoticeDao">
+
+	<insert id="addNotice" parameterType="java.util.HashMap">
+		insert into
+		notice( title, description, createTime, createUser, xiaoqu) values
+		(#{notice.title},#{notice.description},#{notice.createTime},#{notice.createUser},#{notice.xiaoqu})
+	</insert>
+	
+	<select id="selectNoticeByXiaoqu" parameterType="java.util.HashMap"   resultMap="noticeMap"  >
+	   select title, description, createTime, xiaoqu
+	   from notice
+	   where xiaoqu = #{xiaoqu}
+	   order by id desc limit 0,1 ;
+	</select> 
+	
+	<select id="selectNoticesByXiaoqu" parameterType="java.util.HashMap"   resultMap="noticeMap"  >
+	   select title, description, createTime, xiaoqu
+	   from notice
+	   where xiaoqu = #{xiaoqu}
+	   order by id desc
+	</select> 
+	
+	<resultMap type="Notice" id="noticeMap">
+		<id property="id" column="id" />
+		<result property="title" column="title" />
+		<result property="description" column="description" />
+		<result property="createTime" column="createTime" />
+		<result property="createUser" column="createUser" />
+		<result property="xiaoqu" column="xiaoqu" />
+	</resultMap>
+	
+</mapper>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.lhdx.www.server.dao.UserDao">
+
+	<insert id="addUser" parameterType="java.util.HashMap">
+		insert into
+		user( name, phone, addr, comment, wxId,xiaoqu,createTime,birthday,jf,jfDate) values
+		(#{user.name}, #{user.phone}, #{user.addr}, #{user.comment}, #{user.wxId}, #{user.xiaoqu},#{user.createTime},#{user.birthday},#{user.jf},#{user.jfDate})
+	</insert>
+	
+	<select id="selectUserByWxId" parameterType="java.util.HashMap"   resultMap="userMap"  >
+	   select id,name, phone, addr, comment, wxId, xiaoqu,auth,createTime,jf,jfDate
+	   from user
+	   where wxId = #{wxId}
+	</select>
+	 
+	<select id="selectUserByPhone" parameterType="java.util.HashMap"   resultMap="userMap"  >
+	   select id,name, phone, addr, comment, wxId, xiaoqu,auth,createTime,jf,jfDate
+	   from user
+	   where phone = #{phone}
+	</select> 
+	
+	
+	<select id="selectAdmin" parameterType="java.util.HashMap"   resultMap="userMap"  >
+	   select id,name, phone, addr, comment, wxId, xiaoqu,auth,createTime
+	   from user
+	   where wxId = #{wxId}
+	   and auth = 'admin'
+	</select> 
+	
+	
+	<update id="updateUser" parameterType="java.util.HashMap">
+		update user set
+		auth = #{auth}
+		where id = #{id}
+    </update>
+    
+    <update id="updateUserInfo" parameterType="java.util.HashMap">
+		update user set
+		name = #{user.name},
+		phone = #{user.phone},
+		addr = #{user.addr},
+		jf = #{user.jf}
+		where id = #{user.id}
+    </update>
+	
+	<update id="updateJf" parameterType="java.util.HashMap">
+		update user set
+		jf = #{jf},
+		jfDate = #{jfDate}
+		where id = #{id}
+    </update>
+	
+	<resultMap type="User" id="userMap">
+		<id property="id" column="id" />
+		<result property="name" column="name" />
+		<result property="phone" column="phone" />
+		<result property="addr" column="addr" />
+		<result property="comment" column="comment" />
+		<result property="wxId" column="wxId" />
+		<result property="xiaoqu" column="xiaoqu" />
+		<result property="auth" column="auth" />
+		<result property="createTime" column="createTime" />
+		<result property="birthday" column="birthday" />
+		<result property="jfDate" column="jfDate" />
+		<result property="jf" column="jf" />
+		
+	</resultMap>
+	
+</mapper>
