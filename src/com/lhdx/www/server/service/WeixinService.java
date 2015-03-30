@@ -48,19 +48,19 @@ public class WeixinService {
 			}
 			//【微信触发类型】图片消息
 			else if (type.equals(Message.IMAGE)) {
-				replyContent = "您发送的是图片消息！";
+				replyContent = getOtherReply();
 			}
 			//【微信触发类型】地理位置消息
 			else if (type.equals(Message.LOCATION)) {
-				replyContent = "您发送的是地理位置消息！";
+				replyContent = getOtherReply();
 			}
 			//【微信触发类型】链接消息
 			else if (type.equals(Message.LINK)) {
-				replyContent = "您发送的是链接消息！";
+				replyContent = getOtherReply();
 			}
 			//【微信触发类型】音频消息
 			else if (type.equals(Message.VOICE)) {
-				replyContent = "您发送的是音频消息！";
+				replyContent = getOtherReply();
 			}
 			//【微信触发类型】事件推送
 			else if (type.equals(Message.EVENT)) {
@@ -356,7 +356,7 @@ public class WeixinService {
 		return "订阅成功，太湖世家将为您提供更优质的服务，请点击相关菜单获得了解更多内容！";
 	}
 	public static String getOtherReply() {
-		return "太湖世家将为您提供更优质的服务，请点击相关菜单获得了解更多内容！";
+		return "1、请点击左下角菜单图标。\n2、点击“问题反馈”菜单。\n3、点击“最新反馈”菜单。\n4、填写相关信息和问题。（首次请绑定小区）";
 	}
 	public boolean isUserRegisted(String wxId){
 		User u = userDao.findUserByWxId(wxId);

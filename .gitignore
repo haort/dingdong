@@ -22,3 +22,23 @@ out/artifacts/dingdong_war/lhdx.war
 src/config/db.properties
 
 *.class
+
+out/.DS_Store
+
+out/artifacts/.DS_Store
+
+out/artifacts/dingdong_war/.DS_Store
+
+src/.DS_Store
+
+src/com/.DS_Store
+
+web/.DS_Store
+
+web/WEB-INF/.DS_Store
+
+web/WEB-INF/lib/.DS_Store
+
+web/WEB-INF/views/.DS_Store
+
+.DS_Store
