@@ -48,19 +48,19 @@ public class WeixinService {
 			}
 			//【微信触发类型】图片消息
 			else if (type.equals(Message.IMAGE)) {
-				replyContent = getOtherReply();
+				respMessage = doTextResponse(message);
 			}
 			//【微信触发类型】地理位置消息
 			else if (type.equals(Message.LOCATION)) {
-				replyContent = getOtherReply();
+				respMessage = doTextResponse(message);
 			}
 			//【微信触发类型】链接消息
 			else if (type.equals(Message.LINK)) {
-				replyContent = getOtherReply();
+				respMessage = doTextResponse(message);
 			}
 			//【微信触发类型】音频消息
 			else if (type.equals(Message.VOICE)) {
-				replyContent = getOtherReply();
+				respMessage = doTextResponse(message);
 			}
 			//【微信触发类型】事件推送
 			else if (type.equals(Message.EVENT)) {
