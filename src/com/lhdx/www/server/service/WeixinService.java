@@ -1,15 +1,5 @@
 package com.lhdx.www.server.service;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Map;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
-import org.springframework.stereotype.Service;
-
 import com.lhdx.www.server.dao.NoticeDao;
 import com.lhdx.www.server.dao.UserDao;
 import com.lhdx.www.server.model.Message;
@@ -19,6 +9,14 @@ import com.lhdx.www.server.model.resp.Article;
 import com.lhdx.www.server.model.resp.NewsMessageResp;
 import com.lhdx.www.server.model.resp.TextMessageResp;
 import com.lhdx.www.server.util.MessageUtil;
+import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 @Service("weixinService")
 public class WeixinService {
@@ -208,21 +206,33 @@ public class WeixinService {
 			}else if("B_WYGG".equals(eventKey)){
 				Notice n= noticeDao.findNoticeByXiaoqu(u.getXiaoqu());
 				if(n!=null){
-					TextMessageResp textMessage = new TextMessageResp();
-					textMessage.setToUserName(message.getFromUserName());
-					textMessage.setFromUserName(message.getToUserName());
-					textMessage.setCreateTime(new Date().getTime());
-					textMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_TEXT);
-					textMessage.setContent("尊敬的业主您好:\n"+"'"+u.getXiaoqu()+"'物业管理处于"+n.getCreateTime()+"发布最新公告:\n"+"\""+n.getDescription()+"\"");
-					responsMessage = MessageUtil.textMessageToXml(textMessage);
+					Article article = new Article();
+					article.setTitle(u.getXiaoqu()+"物业管理处最新公告");
+					article.setDescription("尊敬的业主您好:\n"+n.getDescription()+"\n发布时间："+n.getCreateTime());
+					List<Article> articleList = new ArrayList<Article>();
+					articleList.add(article);
+					NewsMessageResp newsResp = new NewsMessageResp();
+					newsResp.setCreateTime(new Date().getTime());
+					newsResp.setFromUserName(message.getToUserName());
+					newsResp.setToUserName(message.getFromUserName());
+					newsResp.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_NEWS);
+					newsResp.setArticleCount(articleList.size());
+					newsResp.setArticles(articleList);
+					responsMessage = MessageUtil.newsMessageToXml(newsResp);
 				}else{
-					TextMessageResp textMessage = new TextMessageResp();
-					textMessage.setToUserName(message.getFromUserName());
-					textMessage.setFromUserName(message.getToUserName());
-					textMessage.setCreateTime(new Date().getTime());
-					textMessage.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_TEXT);
-					textMessage.setContent("尊敬的业主您好:\n"+u.getXiaoqu()+"目前暂无公告");
-					responsMessage = MessageUtil.textMessageToXml(textMessage);
+					Article article = new Article();
+					article.setTitle(u.getXiaoqu()+"物业管理处最新公告");
+					article.setDescription("尊敬的业主您好:\n目前暂无公告");
+					List<Article> articleList = new ArrayList<Article>();
+					articleList.add(article);
+					NewsMessageResp newsResp = new NewsMessageResp();
+					newsResp.setCreateTime(new Date().getTime());
+					newsResp.setFromUserName(message.getToUserName());
+					newsResp.setToUserName(message.getFromUserName());
+					newsResp.setMsgType(MessageUtil.RESP_MESSAGE_TYPE_NEWS);
+					newsResp.setArticleCount(articleList.size());
+					newsResp.setArticles(articleList);
+					responsMessage = MessageUtil.newsMessageToXml(newsResp);
 				}
 			}else if ("B_CKFK".equals(eventKey)){
 				Article article = new Article();
