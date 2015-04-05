@@ -42,3 +42,5 @@ web/WEB-INF/lib/.DS_Store
 web/WEB-INF/views/.DS_Store
 
 .DS_Store
+
+out/artifacts/dingdong_war/dingdong_war.war

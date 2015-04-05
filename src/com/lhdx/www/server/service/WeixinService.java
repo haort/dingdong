@@ -191,8 +191,8 @@ public class WeixinService {
 				Article article = new Article();
 				article.setTitle("问题反馈");
 				article.setDescription("请准确填写您的问题，以便我们能及时联系您！");
-				article.setPicUrl("http://yixinservice.sinaapp.com/images/contact.png");
-				article.setUrl("http://yixinservice.sinaapp.com/service/getContact.do?wxId="+wxId);
+				article.setPicUrl("http://lhdx.sinaapp.com/images/contact.png");
+				article.setUrl("http://lhdx.sinaapp.com/service/getContact.do?wxId=" + wxId);
 				List<Article> articleList = new ArrayList<Article>();
 				articleList.add(article);
 				NewsMessageResp newsResp = new NewsMessageResp();
@@ -208,7 +208,9 @@ public class WeixinService {
 				if(n!=null){
 					Article article = new Article();
 					article.setTitle(u.getXiaoqu()+"物业管理处最新公告");
-					article.setDescription("尊敬的业主您好:\n"+n.getDescription()+"\n发布时间："+n.getCreateTime());
+					article.setDescription(n.getDescription()+"\n发布时间："+n.getCreateTime());
+					article.setPicUrl("");
+					article.setUrl("http://lhdx.sinaapp.com/service/getNotice.do?wxId="+wxId);
 					List<Article> articleList = new ArrayList<Article>();
 					articleList.add(article);
 					NewsMessageResp newsResp = new NewsMessageResp();
@@ -238,8 +240,8 @@ public class WeixinService {
 				Article article = new Article();
 				article.setTitle("反馈查看");
 				article.setDescription("查看你所反馈的问题");
-				article.setPicUrl("http://yixinservice.sinaapp.com/images/ck.png");
-				article.setUrl("http://yixinservice.sinaapp.com/service/getCkcontact.do?wxId="+wxId);
+				article.setPicUrl("http://lhdx.sinaapp.com/images/ck.png");
+				article.setUrl("http://lhdx.sinaapp.com/service/getCkcontact.do?wxId="+wxId);
 				List<Article> articleList = new ArrayList<Article>();
 				articleList.add(article);
 				NewsMessageResp newsResp = new NewsMessageResp();
@@ -254,8 +256,8 @@ public class WeixinService {
 				Article article = new Article();
 				article.setTitle("满意度调查");
 				article.setDescription("请您参加满意度调查");
-				article.setPicUrl("http://yixinservice.sinaapp.com/images/dc.png");
-				article.setUrl("http://yixinservice.sinaapp.com/service/getDc.do?wxId="+wxId);
+				article.setPicUrl("http://lhdx.sinaapp.com/images/dc.png");
+				article.setUrl("http://lhdx.sinaapp.com/service/getDc.do?wxId="+wxId);
 				List<Article> articleList = new ArrayList<Article>();
 				articleList.add(article);
 				NewsMessageResp newsResp = new NewsMessageResp();
@@ -270,8 +272,8 @@ public class WeixinService {
 				Article article = new Article();
 				article.setTitle("历史公告");
 				article.setDescription("查看历史公告");
-				article.setPicUrl("http://yixinservice.sinaapp.com/images/gg.png");
-				article.setUrl("http://yixinservice.sinaapp.com/service/getNotice.do?wxId="+wxId);
+				article.setPicUrl("http://lhdx.sinaapp.com/images/gg.png");
+				article.setUrl("http://lhdx.sinaapp.com/service/getNotice.do?wxId="+wxId);
 				List<Article> articleList = new ArrayList<Article>();
 				articleList.add(article);
 				NewsMessageResp newsResp = new NewsMessageResp();
@@ -286,8 +288,8 @@ public class WeixinService {
 				Article article = new Article();
 				article.setTitle("签到有礼");
 				article.setDescription("签到获得积分，可以兑换礼品");
-				article.setPicUrl("http://yixinservice.sinaapp.com/images/qd.png");
-				article.setUrl("http://yixinservice.sinaapp.com/service/getQd.do?wxId="+wxId);
+				article.setPicUrl("http://lhdx.sinaapp.com/images/qd.png");
+				article.setUrl("http://lhdx.sinaapp.com/service/getQd.do?wxId="+wxId);
 				List<Article> articleList = new ArrayList<Article>();
 				articleList.add(article);
 				NewsMessageResp newsResp = new NewsMessageResp();
@@ -303,8 +305,8 @@ public class WeixinService {
 					Article article = new Article();
 					article.setTitle("管理员登陆");
 					article.setDescription("管理员登陆");
-					article.setPicUrl("http://yixinservice.sinaapp.com/images/ad.png");
-					article.setUrl("http://yixinservice.sinaapp.com/service/getAd.do?wxId="+wxId);
+					article.setPicUrl("http://lhdx.sinaapp.com/images/ad.png");
+					article.setUrl("http://lhdx.sinaapp.com/service/getAd.do?wxId="+wxId);
 					List<Article> articleList = new ArrayList<Article>();
 					articleList.add(article);
 					NewsMessageResp newsResp = new NewsMessageResp();
@@ -320,8 +322,8 @@ public class WeixinService {
 				Article article = new Article();
 				article.setTitle("积分商城");
 				article.setDescription("签到获得积分，可以兑换礼品");
-				article.setPicUrl("http://yixinservice.sinaapp.com/images/jfsc.png");
-				article.setUrl("http://yixinservice.sinaapp.com/service/getJfsc.do?wxId="+wxId);
+				article.setPicUrl("http://lhdx.sinaapp.com/images/jfsc.png");
+				article.setUrl("http://lhdx.sinaapp.com/service/getJfsc.do?wxId="+wxId);
 				List<Article> articleList = new ArrayList<Article>();
 				articleList.add(article);
 				NewsMessageResp newsResp = new NewsMessageResp();
@@ -344,8 +346,8 @@ public class WeixinService {
 		Article article = new Article();
 		article.setTitle("绑定小区");
 		article.setDescription("请绑定您所属小区，以便于获得更好的服务！");
-		article.setPicUrl("http://yixinservice.sinaapp.com/images/reg.png");
-		article.setUrl("http://yixinservice.sinaapp.com/service//getReg.do?wxId="+wxId);
+		article.setPicUrl("http://lhdx.sinaapp.com/images/reg.png");
+		article.setUrl("http://lhdx.sinaapp.com/service//getReg.do?wxId="+wxId);
 		List<Article> articleList = new ArrayList<Article>();
 		articleList.add(article);
 		NewsMessageResp newsResp = new NewsMessageResp();
