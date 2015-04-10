@@ -1,6 +1,7 @@
 package com.lhdx.www.server.web;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -166,7 +167,7 @@ public class ViewController {
 	@RequestMapping(value = "/getReg", method = RequestMethod.GET)
 	public ModelAndView getReg(String wxId) {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("reg");
+		mv.setViewName("reg2");
 		if (wxId != null && !"".equals(wxId)) {
 			mv.addObject("wxId", wxId);
 		}
@@ -174,14 +175,16 @@ public class ViewController {
 	}
 
 	@RequestMapping(value = "/getView", method = RequestMethod.GET)
-	public ModelAndView getView(String code, String state) {
+	public ModelAndView getView(String code, String state,HttpSession httpSession) {
 		ModelAndView mv = new ModelAndView();
 		if (code != null) {
 			WeixinOauth2Token wo = authorityService.getOauth2AccessToken(code);
 			if (wo != null) {
 				User u = userService.findUserByWxId(wo.getOpenId());
 				mv.addObject("wxId", wo.getOpenId());
+				httpSession.setAttribute("wxId",wo.getOpenId());
 				if(u!=null){
+					httpSession.setAttribute("user",u);
 					if(state != null&&!"ad".equals(state)){
 						mv.setViewName(state);
 					}else if(state != null&&"ad".equals(state)){
@@ -194,7 +197,7 @@ public class ViewController {
 						mv.setViewName("404");
 					}
 				}else{
-					mv.setViewName("reg");
+					mv.setViewName("reg2");
 				}
 			}
 		}
@@ -204,7 +207,7 @@ public class ViewController {
 	@RequestMapping(value = "/getTest", method = RequestMethod.GET)
 	public ModelAndView getTest() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("test");
+		mv.setViewName("reg2");
 		return mv;
 	}
 

@@ -44,3 +44,7 @@ web/WEB-INF/views/.DS_Store
 .DS_Store
 
 out/artifacts/dingdong_war/dingdong_war.war
+
+.idea/artifacts/amaze_war_exploded.xml
+
+.idea/uiDesigner.xml

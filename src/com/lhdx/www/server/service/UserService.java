@@ -100,7 +100,7 @@ public class UserService {
 					Date nowDate = df.parse(nwDateS);
 					if (dt1.getTime() < nowDate.getTime()) {
 						userDao.updateJf(user.getId(), user.getJf()+n,nwDateS);
-						map.put("qd", "true");
+						map.put("qd", true);
 						map.put("jf", user.getJf()+n);
 					}
 				} catch (ParseException e) {
@@ -108,7 +108,7 @@ public class UserService {
 				}
 			}else if(jfDate ==null||"".equals(jfDate)){
 				userDao.updateJf(user.getId(), user.getJf()+n,nwDateS);
-				map.put("qd", "true");
+				map.put("qd", true);
 				map.put("jf", user.getJf()+n);
 			}
 		} 
