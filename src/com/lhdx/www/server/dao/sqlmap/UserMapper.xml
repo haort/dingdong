@@ -44,6 +44,13 @@
 		jf = #{user.jf}
 		where id = #{user.id}
     </update>
+
+	<update id="updateUserXiaoqu" parameterType="java.util.HashMap">
+		update user set
+		addr = #{user.addr},
+		xiaoqu = #{user.xiaoqu}
+		where id = #{user.id}
+	</update>
 	
 	<update id="updateJf" parameterType="java.util.HashMap">
 		update user set

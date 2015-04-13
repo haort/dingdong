@@ -26,91 +26,91 @@
 
 
     <li>
-      <a href="#">
-        <img class="widget-icon" src="<%=request.getContextPath()%>/assets/i/footer.png" alt=""/>
+      <a href="#" class="am-margin-left-sm">
+        <i class="am-icon-building"></i>
         <span class="widget-name">百合园</span>
       </a>
     </li>
 
     <li>
-      <a href="#" data-rel="">
-        <img class="widget-icon" src="<%=request.getContextPath()%>/assets/i/footer.png" alt=""/>
+      <a href="#" class="am-margin-left-sm">
+        <i class="am-icon-building"></i>
         <span class="widget-name">金域豪庭</span>
       </a>
     </li>
 
     <li>
-      <a href="#" data-rel="">
-        <img class="widget-icon" src="<%=request.getContextPath()%>/assets/i/footer.png" alt=""/>
+      <a href="#" class="am-margin-left-sm">
+        <i class="am-icon-building"></i>
         <span class="widget-name">金宁广场</span>
       </a>
     </li>
 
     <li>
-      <a href="#" data-rel="">
-        <img class="widget-icon" src="<%=request.getContextPath()%>/assets/i/footer.png" alt=""/>
+      <a href="#" class="am-margin-left-sm">
+        <i class="am-icon-building"></i>
         <span class="widget-name">紫晶广场</span>
       </a>
     </li>
 
     <li>
-      <a href="#" data-rel="">
-        <img class="widget-icon" src="<%=request.getContextPath()%>/assets/i/footer.png" alt=""/>
+      <a href="#" class="am-margin-left-sm">
+        <i class="am-icon-building"></i>
         <span class="widget-name">钻石华府</span>
       </a>
     </li>
 
     <li>
-      <a href="#" data-rel="">
-        <img class="widget-icon" src="<%=request.getContextPath()%>/assets/i/footer.png" alt=""/>
+      <a href="#" class="am-margin-left-sm">
+        <i class="am-icon-building"></i>
         <span class="widget-name">文博家园</span>
       </a>
     </li>
 
     <li>
-      <a href="#" data-rel="">
-        <img class="widget-icon" src="<%=request.getContextPath()%>/assets/i/footer.png" alt=""/>
+      <a href="#" class="am-margin-left-sm">
+        <i class="am-icon-building"></i>
         <span class="widget-name">汇锦水岸城</span>
       </a>
     </li>
 
     <li>
-      <a href="#" data-rel="">
-        <img class="widget-icon" src="<%=request.getContextPath()%>/assets/i/footer.png" alt=""/>
+      <a href="#" class="am-margin-left-sm">
+        <i class="am-icon-building"></i>
         <span class="widget-name">莉湖花园</span>
       </a>
     </li>
     <li>
-      <a href="#" data-rel="">
-        <img class="widget-icon" src="<%=request.getContextPath()%>/assets/i/footer.png" alt=""/>
+      <a href="#" class="am-margin-left-sm">
+        <i class="am-icon-building"></i>
         <span class="widget-name">桥西苑</span>
       </a>
     </li>
 
     <li>
-      <a href="#" data-rel="">
-        <img class="widget-icon" src="<%=request.getContextPath()%>/assets/i/footer.png" alt=""/>
+      <a href="#" class="am-margin-left-sm">
+        <i class="am-icon-building"></i>
         <span class="widget-name">丽岛新苑</span>
       </a>
     </li>
 
     <li>
-      <a href="#" data-rel="">
-        <img class="widget-icon" src="<%=request.getContextPath()%>/assets/i/footer.png" alt=""/>
+      <a href="#" class="am-margin-left-sm">
+        <i class="am-icon-building"></i>
         <span class="widget-name">骏景园</span>
       </a>
     </li>
 
     <li>
-      <a href="#" data-rel="">
-        <img class="widget-icon" src="<%=request.getContextPath()%>/assets/i/footer.png" alt=""/>
+      <a href="#" class="am-margin-left-sm">
+        <i class="am-icon-building"></i>
         <span class="widget-name">雨庭花园</span>
       </a>
     </li>
 
     <li>
-      <a href="#" data-rel="">
-        <img class="widget-icon" src="<%=request.getContextPath()%>/assets/i/footer.png" alt=""/>
+      <a href="#" class="am-margin-left-sm">
+        <i class="am-icon-building"></i>
         <span class="widget-name">璟湖广场</span>
       </a>
     </li>

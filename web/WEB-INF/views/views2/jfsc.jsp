@@ -33,7 +33,7 @@
     <div class="am-offcanvas-bar am-offcanvas-bar-flip">
       <ul class="am-menu-nav sm-block-grid-1">
         <li class="">
-          <a href="/views2/reg.jsp">更换小区</a>
+          <a href="<%=request.getContextPath()%>/service/getReg2.do">更换小区</a>
         </li>
       </ul>
     </div>
@@ -50,6 +50,8 @@
     </ul>
   </div>
 </div>
+<!--list end-->
+
 <!--content end-->
 
 <!-- Navbar start-->
@@ -74,7 +76,7 @@
           products+='</div>';
           products+='<div class="am-u-sm-8 am-list-main">';
           products+='<h3 class="am-list-item-hd">';
-          products+='<a href="/views2/product.jsp">'+item.productName+'</a>';
+          products+='<a href="<%=request.getContextPath()%>/service/getProduct2.do?productId='+item.productId+'">'+item.productName+'</a>';
           products+='</h3>';
           products+='<div class="am-list-item-text">';
           products+='需要积分：'+item.productScore+'，剩余数量：'+item.num;

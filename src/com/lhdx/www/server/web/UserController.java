@@ -87,20 +87,23 @@ public class UserController {
 
 	@RequestMapping(value = "/initQd", method = RequestMethod.POST)
 	public @ResponseBody
-	Map initQd() {
-		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("jf",1000);
-		map.put("qd",false);
-		return map;
+	Map initQd(HttpSession httpSession) {
+		User u = (User) httpSession.getAttribute("user");
+		if(u!=null){
+			return userService.isDq(u);
+		}else{
+			return null;
+		}
 	}
 
 	@RequestMapping(value = "/addJf", method = RequestMethod.POST)
 	public @ResponseBody
 	Map addJf(@RequestParam("jf") String jf,HttpSession httpSession) {
 		User u = (User) httpSession.getAttribute("user");
-		if(u!=null){
+
+		if (u != null) {
 			return userService.addjf(u.getWxId(), jf);
-		}else{
+		} else {
 			return null;
 		}
 

@@ -48,7 +48,7 @@
     <div class="am-offcanvas-bar am-offcanvas-bar-flip">
       <ul class="am-menu-nav sm-block-grid-1">
         <li class="">
-          <a href="/views2/reg.jsp">更换小区</a>
+          <a href="<%=request.getContextPath()%>/service/getReg2.do">更换小区</a>
         </li>
       </ul>
     </div>
@@ -75,7 +75,7 @@
         </a>
       </p>
       <p>
-        <a href="/views2/jfsc.jsp" class="am-btn am-btn-sm am-btn-default"><i class="am-icon-shopping-cart"></i>前往积分商场-></a>
+        <a href="<%=request.getContextPath()%>/service/getJfsc2.do" class="am-btn am-btn-sm am-btn-default"><i class="am-icon-shopping-cart"></i>前往积分商场-></a>
       </p>
     </div>
   </div>
@@ -146,17 +146,31 @@
         $('#my-alert').modal();
       }else{
         var n=Math.round(Math.random()*1)+1;
-        var $i=$('<b>').text('+'+n);
-        var x=e.pageX,y=e.pageY;
-        $i.css({top:y-20,left:x,position:'absolute',color:'#E94F06'});
-        $('body').append($i);
-        $i.animate({top:y-180,opacity:0,"font-size":'1.4em'},1500,function(){
-          $i.remove();
+        $.ajax({
+          type: 'post',
+          url: "<%=request.getContextPath()%>/service/addJf.do",
+          cache: false,
+          data: "jf="+n,
+          success: function(data){
+            if(true==data.qd){
+              var $i=$('<b>').text('+'+n);
+              var x=e.pageX,y=e.pageY;
+              $i.css({top:y-20,left:x,position:'absolute',color:'#E94F06'});
+              $('body').append($i);
+              $i.animate({top:y-180,opacity:0,"font-size":'1.4em'},1500,function(){
+                $i.remove();
+              });
+              e.stopPropagation();
+              $('#nowScore').html(parseInt($('#nowScore').text())+n);
+              $('#qdBtn').removeClass('am-btn-secondary').addClass('am-btn-warning');
+              $('#qdBtn').html('<i class="am-icon-check-square-o"></i>已签到');
+            }
+          },
+          error: function(){
+            return;
+          }
         });
-        e.stopPropagation();
-        $('#nowScore').html(parseInt($('#nowScore').text())+n);
-        $(this).removeClass('am-btn-secondary').addClass('am-btn-warning');
-        $(this).html('<i class="am-icon-check-square-o"></i>已签到');
+
       }
     });
   });

@@ -1,7 +1,9 @@
 package com.lhdx.www.server.service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -45,8 +47,10 @@ public class ProductService {
 				
 				
 				Product p = productDao.findProductById(Integer.parseInt(productId));
-				if(p!=null){
+				if(p!=null&&u.getJf()>=p.getProductScore()){
 					u.setJf(u.getJf()-p.getProductScore());
+					productDao.updateNum(p.getProductId(), p.getNum()-1);
+					porderDao.addPorder(c);
 				}
 				
 				if(u.getName()==null||"".equals(u.getName())){
@@ -58,10 +62,20 @@ public class ProductService {
 				if(u.getAddr()==null||"".equals(u.getAddr())){
 					u.setAddr(addr);
 				}
-				
-				productDao.updateNum(p.getProductId(), p.getNum()-1);
-				porderDao.addPorder(c);
+
 				userDao.updateUser(u);
 		}
+	}
+
+	public Map isExchanged(String wxId, String productId) {
+		User u = userDao.findUserByWxId(wxId);
+		Product p = productDao.findProductById(Integer.parseInt(productId));
+		Map<String,Boolean> map= new HashMap<String, Boolean>();
+		if(u.getJf()>=p.getProductScore()){
+			map.put("isExchanged",true);
+		}else{
+			map.put("isExchanged",false);
+		}
+		return map;
 	}
 }

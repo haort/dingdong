@@ -36,6 +36,10 @@ public class UserService {
 			u.setAuth("");
 			u.setJf(0);
 			userDao.addUser(u);
+		}else{
+			user.setAddr(null);
+			user.setXiaoqu(xiaoqu);
+			userDao.updateUserXiaoqu(user);
 		}
 	}
 
@@ -122,6 +126,37 @@ public class UserService {
 			jf = u.getJf();
 		}
 		return  jf+"";
+	}
+
+	public Map isDq(User u) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (u != null) {
+			User user = findUserByWxId(u.getWxId());
+			String jfDate = user.getJfDate();
+			if(jfDate !=null && !"".equals(jfDate)){
+				DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+				try {
+					Date dt1 = df.parse(user.getJfDate());
+					String nwDateS = df.format(new Date());
+					Date nowDate = df.parse(nwDateS);
+					if (dt1.getTime() < nowDate.getTime()) {
+						map.put("qd", false);
+						map.put("jf", user.getJf());
+					} else {
+						map.put("qd", true);
+						map.put("jf", user.getJf());
+					}
+				} catch (ParseException e) {
+					e.printStackTrace();
+					map.put("qd", false);
+				}
+			}else if(jfDate ==null||"".equals(jfDate)){
+				map.put("qd", false);
+				map.put("jf", user.getJf());
+			}
+		}
+		return map;
+
 	}
 	
 }

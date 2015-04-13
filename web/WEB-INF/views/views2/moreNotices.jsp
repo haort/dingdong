@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="utf-8"%>
+         pageEncoding="utf-8"%>
 <!doctype html>
 <html class="no-js">
 <head>
@@ -15,11 +15,10 @@ pageEncoding="utf-8"%>
   <%@include file="common/js.jsp"%>
 </head>
 <body>
-
 <!-- Header start-->
 <header data-am-widget="header" class="am-header am-header-default">
   <h1 class="am-header-title">
-    <a href="#title-link">积分商场</a>
+    <a href="#title-link">历史公告</a>
   </h1>
 </header>
 <!--Header end-->
@@ -33,26 +32,17 @@ pageEncoding="utf-8"%>
     <div class="am-offcanvas-bar am-offcanvas-bar-flip">
       <ul class="am-menu-nav sm-block-grid-1">
         <li class="">
-          <a href="/views2/reg.jsp">更换小区</a>
+          <a href="<%=request.getContextPath()%>/service/getReg2.do">更换小区</a>
         </li>
       </ul>
     </div>
   </div>
 </nav>
 <!--menu end-->
-<div class="am-g am-margin-top-sm">
-  <div class="am-u-sm-12">
-    <div class="am-thumbnail">
-      <img src="/images/product_bnyddy.jpg" alt=""/>
-      <div class="am-thumbnail-caption">
-        <h3>移动电源</h3>
-        <p>博能895(13000MA)金属移动电源</p>
-        <p>
-          <button class="am-btn am-btn-default">立即兑换</button>
-        </p>
-      </div>
-    </div>
-  </div>
+
+<!--content start-->
+<div class="am-container" id="notices">
+
 </div>
 <!--content end-->
 
@@ -60,9 +50,33 @@ pageEncoding="utf-8"%>
 <%@include file="common/navbar.jsp"%>
 <!-- Navbar end-->
 
+
 <script>
+
   $(function() {
+    $.ajax({
+      type: 'post',
+      url: "/service/getNotices.do",
+      cache: false,
+      dataType: 'json',
+      success: function(data){
+        var notices="";
+        jQuery.each(data, function(i,item){
+          notices +='<hr data-am-widget="divider" style="" class="am-divider am-divider-default"/>';
+          notices += '<main class="am-panel-bd">';
+          notices += item.xiaoqu+'<p>'+item.description+'</p>';
+          notices += '</main>';
+          notices += '<footer class="am-panel-footer">发表于：<p>'+item.createTime+'</p></footer>';
+        });
+
+        $("#notices").html(notices);
+      },
+      error: function(){
+        return;
+      }
+    });
   });
+
 </script>
 </body>
 </html>

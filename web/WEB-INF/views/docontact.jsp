@@ -60,8 +60,7 @@
 		            	if(item.flag!="正在处理"){
 		            	contact+="<a href='javascript:void(0)' onclick='doContact("+item.id+",\"正在处理\")' class='buttonWrapper buttonGreen' id=flag"+item.id+">正在处理&nbsp&nbsp&nbsp&nbsp&nbsp</a> ";
 		            	}
-		            	contact+="<a href='javascript:void(0)' onclick='doContact("+item.id+",\"已解决\")' class='buttonWrapper buttonGreen'>已解决&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a> ";
-		            	contact+="<a href='javascript:void(0)' onclick='doContact("+item.id+",\"提交上级部门\")' class='buttonWrapper buttonPink'>提交上级部门</a>";
+		            	contact+="<a href='javascript:void(0)' onclick='doContact("+item.id+",\"已解决\")' class='buttonWrapper buttonPink'>已解决&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp</a> ";
 		            	contact+="</p></div><div class='clear'></div></div>";
 		            	 contact+="</div>";
 		            });   

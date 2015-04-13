@@ -4,25 +4,25 @@
      id="">
   <ul class="am-navbar-nav am-cf am-avg-sm-4">
     <li>
-      <a href="<%=request.getContextPath()%>/views2/qd.jsp" class="">
+      <a href="<%=request.getContextPath()%>/service/getQd2.do" class="">
         <span class="am-icon-cart-arrow-down"></span>
         <span class="am-navbar-label">积分商场</span>
       </a>
     </li>
     <li>
-      <a href="<%=request.getContextPath()%>/views2/notice.jsp" class="">
+      <a href="<%=request.getContextPath()%>/service/getNotice2.do" class="">
         <span class="am-icon-desktop"></span>
         <span class="am-navbar-label">最新公告</span>
       </a>
     </li>
     <li>
-      <a href="<%=request.getContextPath()%>/views2/contact.jsp" class="">
+      <a href="<%=request.getContextPath()%>/service/getContact2.do" class="">
         <span class="am-icon-comment-o"></span>
         <span class="am-navbar-label">最新反馈</span>
       </a>
     </li>
     <li>
-      <a href="<%=request.getContextPath()%>/views2/ckcontact.jsp" class="">
+      <a href="<%=request.getContextPath()%>/service/getCkcontact2.do" class="">
         <span class="am-icon-comments-o"></span>
         <span class="am-navbar-label">历史反馈</span>
       </a>

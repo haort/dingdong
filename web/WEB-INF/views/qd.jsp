@@ -49,7 +49,7 @@
 		        cache: false,  
 		        data: "wxId=${wxId}",     
 		        success: function(data){ 
-		        	if("false"==data.qd){
+		        	if(false==data.qd){
 				      $(".singer_r_img").addClass("current");
 				      $("#nowScore").html(+data.jf);
 			      	  week();

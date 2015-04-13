@@ -186,18 +186,18 @@ public class ViewController {
 				if(u!=null){
 					httpSession.setAttribute("user",u);
 					if(state != null&&!"ad".equals(state)){
-						mv.setViewName(state);
+						mv.setViewName("views2/"+state);
 					}else if(state != null&&"ad".equals(state)){
 						if(u.getAuth()!=null&&"admin1".equals(u.getAuth())){
 							mv.setViewName("ad");
 						}else{
-							mv.setViewName("notad");
+							mv.setViewName("views2/qd");
 						}
 					}else{
-						mv.setViewName("404");
+						mv.setViewName("views2/qd");
 					}
 				}else{
-					mv.setViewName("reg2");
+					mv.setViewName("views2/reg");
 				}
 			}
 		}
@@ -205,9 +205,80 @@ public class ViewController {
 	}
 	
 	@RequestMapping(value = "/getTest", method = RequestMethod.GET)
-	public ModelAndView getTest() {
+	public ModelAndView getTest(HttpSession httpSession) {
+		User u = userService.findUserByWxId("oof8Qs_b-wPRj0mCR8h0Jos6gdkE");
+		httpSession.setAttribute("user",u);
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("reg2");
+		mv.setViewName("views2/qd");
+		return mv;
+	}
+
+	@RequestMapping(value = "/getQd2", method = RequestMethod.GET)
+	public ModelAndView getQd2() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("views2/qd");
+		return mv;
+	}
+
+	@RequestMapping(value = "/getNotice2", method = RequestMethod.GET)
+	public ModelAndView getNotice2() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("views2/notice");
+		return mv;
+	}
+
+	@RequestMapping(value = "/getContact2", method = RequestMethod.GET)
+	public ModelAndView getContact2() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("views2/contact");
+		return mv;
+	}
+
+
+	@RequestMapping(value = "/getJfsc2", method = RequestMethod.GET)
+	public ModelAndView getJfsc2() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("views2/jfsc");
+		return mv;
+	}
+
+	@RequestMapping(value = "/getMoreNotices2", method = RequestMethod.GET)
+	public ModelAndView getMoreNotices2() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("views2/moreNotices");
+		return mv;
+	}
+
+	@RequestMapping(value = "/getCkcontact2", method = RequestMethod.GET)
+	public ModelAndView getCkcontact2() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("views2/ckcontact");
+		return mv;
+	}
+
+
+	@RequestMapping(value = "/getReg2", method = RequestMethod.GET)
+	public ModelAndView getReg2() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("views2/reg");
+		return mv;
+	}
+
+
+	@RequestMapping(value = "/getProduct2", method = RequestMethod.GET)
+	public ModelAndView getProduct2(int productId,HttpSession httpSession) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("views2/product");
+		User u = (User) httpSession.getAttribute("user");
+		Product product = productService.findProductById(productId);
+		if(product!=null){
+			mv.addObject("productId",product.getProductId());
+			mv.addObject("productPic",product.getProductPic());
+			mv.addObject("productName", product.getProductName());
+			mv.addObject("productScore", product.getProductScore());
+			mv.addObject("productDes", product.getProductDes());
+			mv.addObject("num", product.getNum());
+		}
 		return mv;
 	}
 

@@ -52,4 +52,20 @@ public class NoticeService {
 		}
 	}
 
+	public Notice findNotice(String xiaoqu){
+		return noticeDao.findNoticeByXiaoqu(xiaoqu);
+	}
+
+
+	public Notice findNotice2(String wxId){
+		User u = userDao.findUserByWxId(wxId);
+		if (u != null) {
+			String xiaoqu = u.getXiaoqu();
+			return noticeDao.findNoticeByXiaoqu(xiaoqu);
+		}else{
+			return null;
+		}
+	}
+
+
 }
