@@ -368,7 +368,7 @@ public class WeixinService {
 		return "订阅成功，太湖世家将为您提供更优质的服务，请点击相关菜单获得了解更多内容！";
 	}
 	public static String getOtherReply() {
-		return "1、请点击左下角菜单图标。\n2、点击“问题反馈”菜单。\n3、点击“最新反馈”菜单。\n4、填写相关信息和问题。（首次请绑定小区）";
+		return "1、请点击左下角菜单图标。\n2、点击“我的物业”菜单。\n3、点击“问题反馈”菜单。\n4、填写相关信息和问题。（首次请绑定小区）";
 	}
 	public boolean isUserRegisted(String wxId){
 		User u = userDao.findUserByWxId(wxId);

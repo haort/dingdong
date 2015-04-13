@@ -206,8 +206,8 @@ public class ViewController {
 	
 	@RequestMapping(value = "/getTest", method = RequestMethod.GET)
 	public ModelAndView getTest(HttpSession httpSession) {
-		User u = userService.findUserByWxId("oof8Qs_b-wPRj0mCR8h0Jos6gdkE");
-		httpSession.setAttribute("user",u);
+//		User u = userService.findUserByWxId("oof8Qs_b-wPRj0mCR8h0Jos6gdkE");
+//		httpSession.setAttribute("user",u);
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("views2/qd");
 		return mv;
@@ -261,6 +261,21 @@ public class ViewController {
 	public ModelAndView getReg2() {
 		ModelAndView mv = new ModelAndView();
 		mv.setViewName("views2/reg");
+		return mv;
+	}
+
+
+	@RequestMapping(value = "/getAd2", method = RequestMethod.GET)
+	public ModelAndView getAd2() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("views2/ad");
+		return mv;
+	}
+
+	@RequestMapping(value = "/getUserView", method = RequestMethod.GET)
+	public ModelAndView getUserView() {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("views2/user");
 		return mv;
 	}
 
