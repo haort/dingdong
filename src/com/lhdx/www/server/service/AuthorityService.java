@@ -14,8 +14,8 @@ public class AuthorityService {
 	private SaeMemcache mc;
 
 	public AuthorityService() {
-		mc = new SaeMemcache();
-		mc.init();
+//		mc = new SaeMemcache();
+//		mc.init();
 	}
 
 	public String getToken() {
@@ -91,6 +91,7 @@ public class AuthorityService {
 					wat.setRefreshToken(jsonObject.getString("refresh_token"));
 					wat.setOpenId(jsonObject.getString("openid"));
 					wat.setScope(jsonObject.getString("scope"));
+					System.out.println("获取凭证"+code+" wxId:"+wat.getOpenId());
 				} catch (Exception e) {
 					
 				}

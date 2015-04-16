@@ -12,7 +12,7 @@
 	<select id="selectContactsByXiaoqu" resultMap="contactMap"
 		parameterType="java.util.HashMap">
 		select  id,name, phone, wenti, xiaoqu,createTime,flag,rep,addr from contact where xiaoqu =
-		#{xiaoqu} and flag in ("未处理","正在处理") 
+		#{xiaoqu} and flag in ("未处理","处理中")
 		order by id desc;
 	</select>
 	
@@ -29,7 +29,7 @@
 		#{wxId} and rep = "未评价"
 		order by id desc;
 	</select>
-	
+
 	<update id="updateContactById" parameterType="java.util.HashMap">
 		update contact set
 		flag = #{flag}
@@ -41,7 +41,7 @@
 		rep = #{rep}
 		where id = #{id}
     </update>
-	
+
 	<resultMap type="Contact" id="contactMap">
 		<id property="id" column="id" />
 		<result property="addr" column="addr" />

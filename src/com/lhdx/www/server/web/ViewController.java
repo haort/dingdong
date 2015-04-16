@@ -25,154 +25,6 @@ public class ViewController {
 	@Resource(name = "productService")
 	private ProductService productService;
 	
-	@RequestMapping(value = "/getProduct", method = RequestMethod.GET)
-	public ModelAndView getProduct(int productId,String wxId,String nowScore) {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("product");
-		Product product = productService.findProductById(productId);
-		if(product!=null){
-			mv.addObject("productId",product.getProductId());
-			mv.addObject("productPic",product.getProductPic());
-			mv.addObject("productName", product.getProductName());
-			mv.addObject("productScore", product.getProductScore());
-			mv.addObject("productDes", product.getProductDes());
-			mv.addObject("num", product.getNum());
-			mv.addObject("wxId", wxId);
-			mv.addObject("nowScore", nowScore);
-		}
-		return mv;
-	}
-
-	@RequestMapping(value = "/getTypography", method = RequestMethod.GET)
-	public ModelAndView getTypography() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("typography");
-		return mv;
-	}
-
-	@RequestMapping(value = "/getJfsc", method = RequestMethod.GET)
-	public ModelAndView getJfsc(String wxId) {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("jfsc");
-		if (wxId != null && !"".equals(wxId)) {
-			mv.addObject("wxId", wxId);
-		}
-		return mv;
-	}
-
-	@RequestMapping(value = "/getAd", method = RequestMethod.GET)
-	public ModelAndView getAd(String wxId) {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("ad");
-		if (wxId != null && !"".equals(wxId)) {
-			mv.addObject("wxId", wxId);
-		}
-		return mv;
-	}
-
-	@RequestMapping(value = "/getCkcontact", method = RequestMethod.GET)
-	public ModelAndView getCkcontact(String wxId) {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("ckcontact");
-		if (wxId != null && !"".equals(wxId)) {
-			mv.addObject("wxId", wxId);
-		}
-		return mv;
-	}
-
-	@RequestMapping(value = "/getAdCkcontact", method = RequestMethod.GET)
-	public ModelAndView getAdCkcontact(String wxId) {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("adCkcontact");
-		if (wxId != null && !"".equals(wxId)) {
-			mv.addObject("wxId", wxId);
-		}
-		return mv;
-	}
-
-	@RequestMapping(value = "/getNotice", method = RequestMethod.GET)
-	public ModelAndView getNotice(String wxId) {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("cknotice");
-		if (wxId != null && !"".equals(wxId)) {
-			mv.addObject("wxId", wxId);
-		}
-		return mv;
-	}
-
-	@RequestMapping(value = "/getContact", method = RequestMethod.GET)
-	public ModelAndView getContact(String wxId) {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("contact");
-		if (wxId != null && !"".equals(wxId)) {
-			mv.addObject("wxId", wxId);
-		}
-		return mv;
-	}
-
-	@RequestMapping(value = "/getDc", method = RequestMethod.GET)
-	public ModelAndView getDc(String wxId) {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("dc");
-		if (wxId != null && !"".equals(wxId)) {
-			mv.addObject("wxId", wxId);
-		}
-		return mv;
-	}
-
-	@RequestMapping(value = "/getDocontact", method = RequestMethod.GET)
-	public ModelAndView getDocontact(String wxId) {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("docontact");
-		if (wxId != null && !"".equals(wxId)) {
-			mv.addObject("wxId", wxId);
-		}
-		return mv;
-	}
-
-	@RequestMapping(value = "/getHelp", method = RequestMethod.GET)
-	public ModelAndView getHelp() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("help");
-		return mv;
-	}
-
-	@RequestMapping(value = "/getIndex", method = RequestMethod.GET)
-	public ModelAndView getIndex() {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("index");
-		return mv;
-	}
-
-	@RequestMapping(value = "/getFbNotice", method = RequestMethod.GET)
-	public ModelAndView getFbNotice(String wxId) {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("notice");
-		if (wxId != null && !"".equals(wxId)) {
-			mv.addObject("wxId", wxId);
-		}
-		return mv;
-	}
-
-	@RequestMapping(value = "/getQd", method = RequestMethod.GET)
-	public ModelAndView getQd(String wxId) {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("qd");
-		if (wxId != null && !"".equals(wxId)) {
-			mv.addObject("wxId", wxId);
-		}
-		return mv;
-	}
-
-	@RequestMapping(value = "/getReg", method = RequestMethod.GET)
-	public ModelAndView getReg(String wxId) {
-		ModelAndView mv = new ModelAndView();
-		mv.setViewName("reg2");
-		if (wxId != null && !"".equals(wxId)) {
-			mv.addObject("wxId", wxId);
-		}
-		return mv;
-	}
 
 	@RequestMapping(value = "/getView", method = RequestMethod.GET)
 	public ModelAndView getView(String code, String state,HttpSession httpSession) {
@@ -182,22 +34,24 @@ public class ViewController {
 			if (wo != null) {
 				User u = userService.findUserByWxId(wo.getOpenId());
 				mv.addObject("wxId", wo.getOpenId());
-				httpSession.setAttribute("wxId",wo.getOpenId());
+				httpSession.setAttribute("wxId", wo.getOpenId());
+				System.out.println("微信Id："+wo.getOpenId());
 				if(u!=null){
 					httpSession.setAttribute("user",u);
+					System.out.println("user：" + u.getName()+"->"+state);
 					if(state != null&&!"ad".equals(state)){
-						mv.setViewName("views2/"+state);
+						mv.setViewName(state);
 					}else if(state != null&&"ad".equals(state)){
 						if(u.getAuth()!=null&&"admin1".equals(u.getAuth())){
-							mv.setViewName("ad");
+							mv.setViewName("adnotice");
 						}else{
-							mv.setViewName("views2/qd");
+							mv.setViewName("qd");
 						}
 					}else{
-						mv.setViewName("views2/qd");
+						mv.setViewName("qd");
 					}
 				}else{
-					mv.setViewName("views2/reg");
+					mv.setViewName("reg");
 				}
 			}
 		}
@@ -206,31 +60,31 @@ public class ViewController {
 	
 	@RequestMapping(value = "/getTest", method = RequestMethod.GET)
 	public ModelAndView getTest(HttpSession httpSession) {
-//		User u = userService.findUserByWxId("oof8Qs_b-wPRj0mCR8h0Jos6gdkE");
-//		httpSession.setAttribute("user",u);
+		User u = userService.findUserByWxId("oof8Qs_b-wPRj0mCR8h0Jos6gdkE");
+		httpSession.setAttribute("user",u);
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("views2/qd");
+		mv.setViewName("qd");
 		return mv;
 	}
 
 	@RequestMapping(value = "/getQd2", method = RequestMethod.GET)
 	public ModelAndView getQd2() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("views2/qd");
+		mv.setViewName("qd");
 		return mv;
 	}
 
 	@RequestMapping(value = "/getNotice2", method = RequestMethod.GET)
 	public ModelAndView getNotice2() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("views2/notice");
+		mv.setViewName("notice");
 		return mv;
 	}
 
 	@RequestMapping(value = "/getContact2", method = RequestMethod.GET)
 	public ModelAndView getContact2() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("views2/contact");
+		mv.setViewName("contact");
 		return mv;
 	}
 
@@ -238,21 +92,21 @@ public class ViewController {
 	@RequestMapping(value = "/getJfsc2", method = RequestMethod.GET)
 	public ModelAndView getJfsc2() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("views2/jfsc");
+		mv.setViewName("jfsc");
 		return mv;
 	}
 
 	@RequestMapping(value = "/getMoreNotices2", method = RequestMethod.GET)
 	public ModelAndView getMoreNotices2() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("views2/moreNotices");
+		mv.setViewName("moreNotices");
 		return mv;
 	}
 
 	@RequestMapping(value = "/getCkcontact2", method = RequestMethod.GET)
 	public ModelAndView getCkcontact2() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("views2/ckcontact");
+		mv.setViewName("ckcontact");
 		return mv;
 	}
 
@@ -260,30 +114,31 @@ public class ViewController {
 	@RequestMapping(value = "/getReg2", method = RequestMethod.GET)
 	public ModelAndView getReg2() {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("views2/reg");
+		mv.setViewName("reg");
 		return mv;
 	}
 
 
-	@RequestMapping(value = "/getAd2", method = RequestMethod.GET)
-	public ModelAndView getAd2() {
+	@RequestMapping(value = "/getUpdateUserView", method = RequestMethod.GET)
+	public ModelAndView getUpdateUserView(HttpSession httpSession) {
+		User u = (User) httpSession.getAttribute("user");
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("views2/ad");
+		mv.setViewName("updateUser");
 		return mv;
 	}
 
-	@RequestMapping(value = "/getUserView", method = RequestMethod.GET)
-	public ModelAndView getUserView() {
+
+	@RequestMapping(value = "/getPorderView", method = RequestMethod.GET)
+	public ModelAndView getPorderView(HttpSession httpSession) {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("views2/user");
+		mv.setViewName("porder");
 		return mv;
 	}
-
 
 	@RequestMapping(value = "/getProduct2", method = RequestMethod.GET)
 	public ModelAndView getProduct2(int productId,HttpSession httpSession) {
 		ModelAndView mv = new ModelAndView();
-		mv.setViewName("views2/product");
+		mv.setViewName("product");
 		User u = (User) httpSession.getAttribute("user");
 		Product product = productService.findProductById(productId);
 		if(product!=null){
@@ -294,6 +149,43 @@ public class ViewController {
 			mv.addObject("productDes", product.getProductDes());
 			mv.addObject("num", product.getNum());
 		}
+		return mv;
+	}
+
+	@RequestMapping(value = "/getAdNotice2", method = RequestMethod.GET)
+	public ModelAndView getAdNotice2(HttpSession httpSession) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("adnotice");
+		return mv;
+	}
+
+	@RequestMapping(value = "/getAdMoreNotices", method = RequestMethod.GET)
+	public ModelAndView getAdMoreNotices(HttpSession httpSession) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("admoreNotices");
+		return mv;
+	}
+
+
+	@RequestMapping(value = "/getAdContact", method = RequestMethod.GET)
+	public ModelAndView getAdContact(HttpSession httpSession) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("adcontact");
+		return mv;
+	}
+
+	@RequestMapping(value = "/getAdMoreContact", method = RequestMethod.GET)
+	public ModelAndView getAdMoreContact(HttpSession httpSession) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("admorecontact");
+		return mv;
+	}
+
+
+	@RequestMapping(value = "/getUserView", method = RequestMethod.GET)
+	public ModelAndView getUserView(HttpSession httpSession) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("user");
 		return mv;
 	}
 

@@ -19,7 +19,7 @@
 <!-- Header start-->
 <header data-am-widget="header" class="am-header am-header-default">
   <h1 class="am-header-title">
-    <a href="#title-link">积分商场</a>
+    <a href="#title-link">已兑礼品</a>
   </h1>
 </header>
 <!--Header end-->
@@ -49,7 +49,7 @@
   $(function() {
     $.ajax({
       type: 'post',
-      url: '<%=request.getContextPath()%>/service/findProducts.do',
+      url: '<%=request.getContextPath()%>/service/findPorders.do',
       cache: false,
       dataType: 'json',
       success: function(data){
@@ -63,10 +63,10 @@
           products+='</div>';
           products+='<div class="am-u-sm-8 am-list-main">';
           products+='<h3 class="am-list-item-hd">';
-          products+='<a href="<%=request.getContextPath()%>/service/getProduct2.do?productId='+item.productId+'">'+item.productName+'</a>';
+          products+='<a href="#">'+item.productName+'</a>';
           products+='</h3>';
           products+='<div class="am-list-item-text">';
-          products+='需要积分：'+item.productScore+'，剩余数量：'+item.num;
+          products+='兑换时间：'+item.createTime;
           products+='</div>';
           products+='</div>';
           products+='</li>';

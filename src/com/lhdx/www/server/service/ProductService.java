@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import com.lhdx.www.server.model.PorderInfo;
 import org.springframework.stereotype.Service;
 
 import com.lhdx.www.server.dao.PorderDao;
@@ -74,8 +75,13 @@ public class ProductService {
 		if(u.getJf()>=p.getProductScore()){
 			map.put("isExchanged",true);
 		}else{
-			map.put("isExchanged",false);
+			map.put("isExchanged", false);
 		}
 		return map;
+	}
+
+
+	public List<PorderInfo> findPorderInfos(String wxId){
+		return porderDao.findPorders(wxId);
 	}
 }

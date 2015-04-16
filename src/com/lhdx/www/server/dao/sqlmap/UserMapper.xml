@@ -51,7 +51,16 @@
 		xiaoqu = #{user.xiaoqu}
 		where id = #{user.id}
 	</update>
-	
+
+	<update id="updateUserInfo2" parameterType="java.util.HashMap">
+		update user set
+		name = #{user.name},
+		phone = #{user.phone},
+		addr = #{user.addr}
+		where id = #{user.id}
+	</update>
+
+
 	<update id="updateJf" parameterType="java.util.HashMap">
 		update user set
 		jf = #{jf},

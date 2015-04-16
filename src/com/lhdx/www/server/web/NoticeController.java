@@ -1,6 +1,7 @@
 package com.lhdx.www.server.web;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -23,27 +24,6 @@ public class NoticeController {
 	@Resource(name = "noticeService")
 	private NoticeService noticeService;
 
-	@RequestMapping(value = "/addNotice",method = RequestMethod.POST)
-	public @ResponseBody
-	String addNotice(
-			@RequestParam("title") String title,
-			@RequestParam("description") String description,
-			@RequestParam("wxId") String wxId) {
-		if(noticeService.isAdmin(wxId)){
-			noticeService.insertNotice(title, description, wxId);
-			return "true";
-		}else{
-			return "false";
-		}
-	}
-	
-	@RequestMapping(value = "/findNotices",method = RequestMethod.POST)
-	public @ResponseBody
-	List findNoticeById(
-			@RequestParam("wxId") String wxId) {
-		return noticeService.findNotices(wxId);
-	}
-
 	@RequestMapping(value = "/findNotice",method = RequestMethod.POST)
 	public @ResponseBody
 	Notice findNoticeById(HttpSession httpSession) {
@@ -58,5 +38,13 @@ public class NoticeController {
 		return noticeService.findNotices(u.getWxId());
 	}
 
+	@RequestMapping(value = "/addNewNotice",method = RequestMethod.POST)
+	public @ResponseBody
+	Map addNewNotice(
+			@RequestParam("title") String title,
+			@RequestParam("description") String description, HttpSession httpSession) {
+		User u = (User) httpSession.getAttribute("user");
+		return noticeService.insertNotice2(title, description, u.getWxId());
+	}
 
 }

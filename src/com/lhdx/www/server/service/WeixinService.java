@@ -346,8 +346,6 @@ public class WeixinService {
 		Article article = new Article();
 		article.setTitle("绑定小区");
 		article.setDescription("请绑定您所属小区，以便于获得更好的服务！");
-		article.setPicUrl("http://lhdx.sinaapp.com/images/reg.png");
-		article.setUrl("http://lhdx.sinaapp.com/service/getReg.do?wxId="+wxId);
 		List<Article> articleList = new ArrayList<Article>();
 		articleList.add(article);
 		NewsMessageResp newsResp = new NewsMessageResp();

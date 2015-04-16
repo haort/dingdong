@@ -23,29 +23,12 @@ public class ProductController {
 	@Resource(name = "productService")
 	private ProductService productService;
 
-
-	@Resource(name = "userService")
-	private UserService userService;
-	
 	@RequestMapping(value = "/findProducts",method = RequestMethod.POST)
 	public @ResponseBody
 	List findProducts() {
 		return productService.findProducts();
 	}
 	
-	@RequestMapping(value = "/exchangeProduct",method = RequestMethod.POST)
-	public @ResponseBody
-	String addContact(
-			@RequestParam("name") String name,
-			@RequestParam("phone") String phone,
-			@RequestParam("wxId") String wxId,
-			@RequestParam("productId") String productId,
-			@RequestParam(value = "addr", required = false)  String addr) {
-		productService.insertOrder(name, phone,wxId, productId,addr);
-		return "{success:true,msg:'保存成功!'}";
-	}
-
-
 	@RequestMapping(value = "/exchangeProduct2",method = RequestMethod.POST)
 	public @ResponseBody
 	String exchangeProduct(
@@ -66,4 +49,12 @@ public class ProductController {
 		User u = (User) httpSession.getAttribute("user");
 		return productService.isExchanged(u.getWxId(), productId);
 	}
+
+	@RequestMapping(value = "/findPorders",method = RequestMethod.POST)
+	public @ResponseBody
+	List findPorders(HttpSession httpSession) {
+		User u = (User) httpSession.getAttribute("user");
+		return productService.findPorderInfos(u.getWxId());
+	}
+
 }

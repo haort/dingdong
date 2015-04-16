@@ -9,6 +9,13 @@
 		(#{o.productId}, #{o.wxId}, #{o.createTime}, #{o.num})
 	</insert>
 
+	<select id="selectPorderInfoByWxId" parameterType="java.util.HashMap"   resultMap="porderInfoMap"  >
+		select  p.productPic, p.productName,o.createTime,o.num
+		from product p,porder o
+		where p.productId =  o.productId and o.wxId = #{wxId}
+		order by o.createTime desc
+	</select>
+
 	<resultMap type="Porder" id="porderMap">
 		<id property="id" column="id" />
 		<result property="productId" column="productId" />
@@ -16,5 +23,11 @@
 		<result property="createTime" column="createTime" />
 		<result property="num" column="num" />
 	</resultMap>
-	
+
+	<resultMap type="PorderInfo" id="porderInfoMap">
+		<result property="productPic" column="p.productPic" />
+		<result property="productName" column="p.productName" />
+		<result property="createTime" column="createTime" />
+		<result property="num" column="num" />
+	</resultMap>
 </mapper>

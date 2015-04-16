@@ -53,21 +53,7 @@ public class ContactService {
 			}
 		}
 	}
-	
-	public List<Contact> findContactsByXiaoqu(String wxId) {
-		User u = userDao.findUserByWxId(wxId);
-		if(u!=null){
-			String xiaoqu = u.getXiaoqu();
-			if(xiaoqu!=null){
-				return contactDao.selectContactsByXiaoqu(xiaoqu);
-			}
-			return null;
-		}else{
-			return null;
-		}
-		 
-	}
-	
+
 	public Map findContactsById(String wxId) {
 		User u = userDao.findUserByWxId(wxId);
 		Map<String,Object> map = new HashMap<String,Object>();  
@@ -81,24 +67,7 @@ public class ContactService {
 		}
 	}
 	
-	public Map findAdContactsById(String wxId) {
-		User u = userDao.findUserByWxId(wxId);
-		Map<String,Object> map = new HashMap<String,Object>();  
-		List<Contact> list = new ArrayList<Contact>();
-		if(u!=null){
-			String auth = u.getAuth();
-			if(auth!=null&&"admin1".equals(auth)){
-				String xiaoqu = u.getXiaoqu();
-				list = contactDao.selectContactsByAdmin(xiaoqu);
-			}
-			map.put("auth", auth);
-			map.put("contacts", list);
-			return map;
-		}else{
-			return null;
-		}
-	}
-	
+
 	public boolean updateContactById(String wxId,String flag,String id){
 		User u = userDao.findUserByWxId(wxId);
 		if(u!=null){
@@ -121,6 +90,33 @@ public class ContactService {
 			 return true;
 		}else{
 			return false;
+		}
+	}
+
+	public Map findContactsByXiaoqu2(String wxId) {
+		User u = userDao.findUserByWxId(wxId);
+		Map<String,Object> map = new HashMap<String,Object>();
+		List<Contact> list = new ArrayList<Contact>();
+		if(u!=null){
+			list = contactDao.selectContactsByXiaoqu(u.getXiaoqu());
+			map.put("contacts", list);
+			return map;
+		}else{
+			return null;
+		}
+	}
+
+	public Map findAdContacts(String wxId) {
+
+		User u = userDao.findUserByWxId(wxId);
+		Map<String,Object> map = new HashMap<String,Object>();
+		List<Contact> list = new ArrayList<Contact>();
+		if(u!=null){
+			list = contactDao.selectContactsByAdmin(u.getXiaoqu());
+			map.put("contacts", list);
+			return map;
+		}else{
+			return null;
 		}
 	}
 }

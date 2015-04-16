@@ -18,7 +18,6 @@ public class ContactDao extends BaseDao {
 	private static final String REPLYCONTACTBYID = ".replyContactById";
 	private static final String SELECTCONTACTSBYADMIN = ".selectContactsByAdmin";
 	
-	
 	public void addContact(Contact u){
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("contact", u);
@@ -44,7 +43,7 @@ public class ContactDao extends BaseDao {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("id", id);
 		map.put("flag", flag);
-		sqlSession.update(NAMESPACE+UPDATECONTACTBYID, map);
+		sqlSession.update(NAMESPACE + UPDATECONTACTBYID, map);
 	}
 	public void replyContactById(String id,String rep){
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -52,5 +51,4 @@ public class ContactDao extends BaseDao {
 		map.put("rep", rep);
 		sqlSession.update(NAMESPACE+REPLYCONTACTBYID, map);
 	}
-	
 }

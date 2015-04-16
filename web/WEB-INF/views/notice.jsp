@@ -1,114 +1,74 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="utf-8"%>
-<!DOCTYPE html>
-<html>
-	<head>
-		<title>太湖世家物业</title>
-		<!-- meta tags start -->
-		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<meta name="viewport"
-			content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-		<!-- meta tags end -->
-		<%@include file="/WEB-INF/views/common/css.jsp"%>
-		<%@include file="/WEB-INF/views/common/js.jsp"%>
-		<script type="text/javascript">
-			$(document).ready(function() {
-				$('#noticeForm').validate( {
-					submitHandler : function(form) {
-						var formData = $("#noticeForm").serialize();
-						$.ajax( {
-							type : "POST",
-							url : "<%=request.getContextPath()%>/service/addNotice.do",
-							cache : false,
-							data : formData,
-							dataType: 'json',
-							success : onSuccess
-						});
-		
-					}
-				});
-		
-				function onSuccess(data, status) {
-				if(data){
-					 $.msgbox.show({
-					        message: '发布成功！',
-					        icon: 'ok',
-					        timeOut: 1000
-					 });
-					  WeixinJSBridge.invoke('closeWindow',{},function(res){
-		              });
-				}else{
-					$.msgbox.show({
-					        message: '发布失败，请用管理员账号登陆！',
-					        icon: 'ok',
-					        timeOut: 1000
-					 });
-				}
-				$('#noticeForm')[0].reset();
-				}
-		
-			});
-		</script>
-	</head>
+         pageEncoding="utf-8" %>
+<!doctype html>
+<html class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>叮咚微社区</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Cache-Control" content="no-siteapp"/>
+    <%@include file="common/css.jsp" %>
+    <%@include file="common/js.jsp" %>
+</head>
+<body>
+<!-- Header start-->
+<header data-am-widget="header" class="am-header am-header-default">
+    <h1 class="am-header-title">
+        <a href="#title-link">最新公告</a>
+    </h1>
+</header>
+<!--Header end-->
 
-	<body>
-		<!-- website wrapper starts -->
-		<div class="websiteWrapper">
-			<!-- header wrapper starts -->
-			<%@include file="/WEB-INF/views/common/header.jsp"%>
-			<!-- header wrapper ends -->
+<!-- Menu start-->
+<%@include file="common/menu.jsp"%>
+<!--menu end-->
 
-			<!-- page wrapper starts -->
-			<div class="pageWrapper contactPageWrapper">
-			<div class="sectionBreak"></div>
-				<div class="contactFormWrapper">
+<!--content start-->
+<div data-am-widget="titlebar" class="am-titlebar am-titlebar-default">
+    <h2 class="am-titlebar-title ">最新公告</h2>
+    <nav class="am-titlebar-nav">
+        <a href="<%=request.getContextPath()%>/service/getMoreNotices2.do" class="">历史公告 &raquo;</a>
+    </nav>
+</div>
 
-					<h4 class="contactTitle">
-						发布物业公告:
-					</h4>
-
-					<!-- contact form starts -->
-
-					<form method="post" class="contactForm" id="noticeForm">
-						<input type="hidden" name="wxId" value="${wxId}" />
-						<fieldset>
-							<div class="formFieldWrapper">
-								<label for="contactNameField">
-									公告主题:
-								</label>
-								<input type="text" name="title" value=""
-									class="contactField required" id="contactNameField"
-									data-placeholder="" />
-							</div>
-							<div class="formTextareaWrapper">
-								<label for="contactMessageTextarea">
-									描述:
-								</label>
-								<textarea name="description" class="contactTextarea required"
-									id="contactMessageTextarea" data-placeholder=""></textarea>
-							</div>
-							<div class="formSubmitButtonErrorsWrapper">
-								<input type="submit" class="buttonWrapper contactSubmitButton"
-									id="submit" value="提交" data-form-id="noticeForm" />
-							</div>
-						</fieldset>
-					</form>
-					<!-- contact form ends -->
-
-				</div>
-
-				<!-- contact form wrapper ends -->
+<section class="am-panel am-panel-default" id="notice">
+</section>
+<!--content end-->
 
 
+<!-- Navbar start-->
+<%@include file="common/navbar.jsp" %>
+<!-- Navbar end-->
 
-			</div>
-			<!-- page wrapper ends -->
+<script>
 
-			<!-- footer wrapper starts -->
-			<%@include file="/WEB-INF/views/common/footer.jsp"%>
-			<!-- footer wrapper ends -->
-		</div>
-		<!-- website wrapper ends -->
-	</body>
+    $(function () {
+        $(document).ready(function () {
+            $.ajax({
+                type: 'post',
+                url: "<%=request.getContextPath()%>/service/findNotice.do",
+                cache: false,
+                dataType: 'json',
+                success: function (data) {
+                    var notice = '<main class="am-panel-bd">';
+                    notice += data.xiaoqu + '<p>' + data.description + '</p>';
+                    notice += '</main>';
+                    notice += '<footer class="am-panel-footer">发表于：<p>' + data.createTime + '</p></footer>';
+
+                    $("#notice").html(notice);
+                },
+                error: function () {
+                    return;
+                }
+            });
+
+        });
+    });
+
+</script>
+</body>
 </html>
-

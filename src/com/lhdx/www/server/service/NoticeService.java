@@ -1,7 +1,9 @@
 package com.lhdx.www.server.service;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -20,28 +22,6 @@ public class NoticeService {
 	@Resource(name = "userDao")
 	private UserDao userDao;
 
-	public void insertNotice(String title, String description, String createUser) {
-			User u = userDao.findUserByWxId(createUser);
-			if (u != null) {
-				Notice c = new Notice();
-				c.setTitle(title);
-				c.setDescription(description);
-				c.setCreateUser(createUser);
-				c.setXiaoqu(u.getXiaoqu());
-				c.setCreateTime(DataFormat.formatDate(new Date()));
-				noticeDao.addNotice(c);
-			}
-	}
-
-	public boolean isAdmin(String wxId) {
-		User u = userDao.findUserByWxId(wxId);
-		if (u != null && "admin1".equals(u.getAuth())) {
-			return true;
-		} else {
-			return false;
-		}
-	}
-	
 	public List<Notice> findNotices(String wxId){
 		User u = userDao.findUserByWxId(wxId);
 		if (u != null) {
@@ -52,11 +32,6 @@ public class NoticeService {
 		}
 	}
 
-	public Notice findNotice(String xiaoqu){
-		return noticeDao.findNoticeByXiaoqu(xiaoqu);
-	}
-
-
 	public Notice findNotice2(String wxId){
 		User u = userDao.findUserByWxId(wxId);
 		if (u != null) {
@@ -65,6 +40,24 @@ public class NoticeService {
 		}else{
 			return null;
 		}
+	}
+
+	public Map insertNotice2(String title, String description, String createUser) {
+		Map<String,Boolean> map = new HashMap<String, Boolean>();
+		User u = userDao.findUserByWxId(createUser);
+		if (u != null&&"admin1".equals(u.getAuth())) {
+			Notice c = new Notice();
+			c.setTitle(title);
+			c.setDescription(description);
+			c.setCreateUser(createUser);
+			c.setXiaoqu(u.getXiaoqu());
+			c.setCreateTime(DataFormat.formatDate(new Date()));
+			noticeDao.addNotice(c);
+			map.put("isAddSucessed",true);
+		}else{
+			map.put("isAddSucessed",false);
+		}
+		return map;
 	}
 
 

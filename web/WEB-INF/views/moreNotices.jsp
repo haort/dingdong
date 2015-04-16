@@ -15,11 +15,10 @@
   <%@include file="common/js.jsp"%>
 </head>
 <body>
-
 <!-- Header start-->
 <header data-am-widget="header" class="am-header am-header-default">
   <h1 class="am-header-title">
-    <a href="#title-link">积分商场</a>
+    <a href="#title-link">历史公告</a>
   </h1>
 </header>
 <!--Header end-->
@@ -29,55 +28,42 @@
 <!--menu end-->
 
 <!--content start-->
-<!-- List -->
-<div data-am-widget="list_news" class="am-list-news am-list-news-default">
-  <div class="am-list-news-bd">
-    <ul class="am-list" id="productList">
+<div class="am-container" id="notices">
 
-    </ul>
-  </div>
 </div>
-<!--list end-->
-
 <!--content end-->
 
 <!-- Navbar start-->
 <%@include file="common/navbar.jsp"%>
 <!-- Navbar end-->
 
+
 <script>
+
   $(function() {
     $.ajax({
       type: 'post',
-      url: '<%=request.getContextPath()%>/service/findProducts.do',
+      url: "/service/getNotices.do",
       cache: false,
       dataType: 'json',
       success: function(data){
-        var products="";
+        var notices="";
         jQuery.each(data, function(i,item){
-          products+='<li class="am-g am-list-item-desced am-list-item-thumbed am-list-item-thumb-left">';
-          products+='<div class="am-u-sm-4 am-list-thumb">';
-          products+='<a href="#">';
-          products+='<img src="<%=request.getContextPath()%>/images/'+item.productPic+'"/>';
-          products+='</a>';
-          products+='</div>';
-          products+='<div class="am-u-sm-8 am-list-main">';
-          products+='<h3 class="am-list-item-hd">';
-          products+='<a href="<%=request.getContextPath()%>/service/getProduct2.do?productId='+item.productId+'">'+item.productName+'</a>';
-          products+='</h3>';
-          products+='<div class="am-list-item-text">';
-          products+='需要积分：'+item.productScore+'，剩余数量：'+item.num;
-          products+='</div>';
-          products+='</div>';
-          products+='</li>';
+          notices +='<hr data-am-widget="divider" style="" class="am-divider am-divider-default"/>';
+          notices += '<main class="am-panel-bd">';
+          notices += item.xiaoqu+'<p>'+item.description+'</p>';
+          notices += '</main>';
+          notices += '<footer class="am-panel-footer">发表于：<p>'+item.createTime+'</p></footer>';
         });
-        $('#productList').html(products);
+
+        $("#notices").html(notices);
       },
       error: function(){
         return;
       }
     });
   });
+
 </script>
 </body>
 </html>

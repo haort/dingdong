@@ -17,6 +17,7 @@ public class UserDao extends BaseDao {
 	private static final String FINDADMIN = ".selectAdmin";
 	private static final String UPDATEUSER = ".updateUser";
 	private static final String UPDATEUSERINFO = ".updateUserInfo";
+	private static final String UPDATEUSERINFO2 = ".updateUserInfo2";
 	private static final String UPDATEUSERXIAOQU = ".updateUserXiaoqu";
 	private static final String UPDATEJF = ".updateJf";
 	
@@ -68,6 +69,12 @@ public class UserDao extends BaseDao {
 		map.put("id", id);
 		map.put("jf", jf);
 		map.put("jfDate", jfDate);
-		sqlSession.update(NAMESPACE+UPDATEJF, map);
+		sqlSession.update(NAMESPACE + UPDATEJF, map);
+	}
+
+	public void updateUser2(User u){
+		Map<String,Object> map = new HashMap<String,Object>();
+		map.put("user", u);
+		sqlSession.update(NAMESPACE+UPDATEUSERINFO2, map);
 	}
 }
