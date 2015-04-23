@@ -1,6 +1,7 @@
 package com.lhdx.www.server.web;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -23,6 +24,9 @@ public class UserController {
 
     @Resource(name = "userService")
     private UserService userService;
+
+    @Resource(name="authorityService")
+    private AuthorityService authorityService;
 
     @RequestMapping(value = "/addUser2", method = RequestMethod.POST)
     public
@@ -110,5 +114,20 @@ public class UserController {
         return userService.initUserView(u.getWxId());
     }
 
+    @RequestMapping(value = "/getXiaoquUsers", method = RequestMethod.POST)
+    public
+    @ResponseBody
+    List getXiaoquUsers(HttpSession httpSession) {
+        User u = (User) httpSession.getAttribute("user");
+        return userService.findXiaoquUsers(u.getWxId());
+    }
+
+    @RequestMapping(value = "/getUserTotal", method = RequestMethod.GET)
+    public
+    @ResponseBody
+    String getUserTotal(HttpSession httpSession) {
+        User u = (User) httpSession.getAttribute("user");
+        return authorityService.getUserTotal();
+    }
 
 }

@@ -1,5 +1,8 @@
 package com.lhdx.www.server.web;
 
+import java.io.File;
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,7 +12,11 @@ import javax.servlet.http.HttpSession;
 
 import com.lhdx.www.server.model.User;
 import com.lhdx.www.server.service.UserService;
+import com.lhdx.www.server.util.DataFormat;
 import com.mchange.v2.util.DoubleWeakHashMap;
+import com.sina.sae.storage.SaeStorage;
+import com.sina.sae.util.SaeUserInfo;
+import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -18,6 +25,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.lhdx.www.server.model.Contact;
 import com.lhdx.www.server.service.ContactService;
+import org.springframework.web.multipart.MultipartFile;
 
 @Controller
 @RequestMapping(value = "/service")
@@ -29,15 +37,48 @@ public class ContactController {
 	//新增反馈
 	@RequestMapping(value = "/addNewContact",method = RequestMethod.POST)
 	public @ResponseBody
-	String addNewContact(
+	Map addNewContact(
 			@RequestParam("name") String name,
 			@RequestParam("phone") String phone,
 			@RequestParam(value = "addr", required = false)  String addr,
-			@RequestParam(value = "wenti", required = false)  String wenti,HttpSession httpSession) {
+			@RequestParam(value = "wenti", required = false)  String wenti,
+			@RequestParam(value = "contactImage", required = false) MultipartFile contactImage, HttpSession httpSession) {
 
 		User u = (User) httpSession.getAttribute("user");
-		contactService.insertContact(name, phone, wenti, u.getWxId(), addr);
-		return "{success:true,msg:'保存成功!'}";
+
+		SaeStorage storage = new SaeStorage();
+		String contactName = null;
+		String contactPhone = null;
+		String contactAddr = null;
+		String contactWenti = null;
+		try {
+			contactName = new String(name.getBytes("ISO8859-1"), "UTF-8");
+			contactPhone = new String(phone.getBytes("ISO8859-1"), "UTF-8");
+			contactAddr = new String(addr.getBytes("ISO8859-1"), "UTF-8");
+			contactWenti = new String(wenti.getBytes("ISO8859-1"), "UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}
+		String image = null;
+		if (contactImage == null || contactImage.isEmpty()) {
+			System.out.println("文件未上传");
+			image = null;
+		} else {
+			try {
+				String fileName = contactImage.getOriginalFilename();
+				String suffix = fileName.substring(fileName.lastIndexOf(".") + 1);
+				image = DataFormat.getUUID() + "." + suffix;
+				FileUtils.copyInputStreamToFile(contactImage.getInputStream(), new File(SaeUserInfo.getSaeTmpPath() + image));
+				storage.upload("contact", SaeUserInfo.getSaeTmpPath() + image, image);
+//				String realPath = httpSession.getServletContext().getRealPath("/contactImages/");
+//				FileUtils.copyInputStreamToFile(contactImage.getInputStream(), new File(realPath, image));
+
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		return contactService.insertContact(contactName, contactPhone, contactWenti, u.getWxId(), contactAddr,image);
 	}
 
 	//用户评价
@@ -84,5 +125,13 @@ public class ContactController {
 
 		User u = (User) httpSession.getAttribute("user");
 		return contactService.findContactsById(u.getWxId());
+	}
+
+	@RequestMapping(value = "/getContactsInfo", method = RequestMethod.POST)
+	public
+	@ResponseBody
+	List getContactsInfo(HttpSession httpSession) {
+		User u = (User) httpSession.getAttribute("user");
+		return contactService.findContactsInfo(u.getWxId());
 	}
 }

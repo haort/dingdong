@@ -40,7 +40,7 @@
     <ul class="am-list">
       <li class="am-modal-actions-header">对本次服务评价</li>
       <li>
-        <a href="javascript:void(0)" onclick="repContact(this)"><span class="am-icon-heart"></span>非常满意</a>
+        <a href="javascript:void(0)" onclick="repContact(this)"><span class="am-icon-thumbs-up"></span>非常满意</a>
       </li>
       <li>
         <a href="javascript:void(0)" onclick="repContact(this)"><span class="am-icon-heart"></span>比较满意</a>
@@ -49,7 +49,7 @@
         <a href="javascript:void(0)" onclick="repContact(this)"><span class="am-icon-check"></span>服务一般</a>
       </li>
       <li>
-        <a href="javascript:void(0)" onclick="repContact(this)"><span class="am-icon-heartbeat"></span>不太满意</a>
+        <a href="javascript:void(0)" onclick="repContact(this)"><span class="am-icon-close"></span>不太满意</a>
       </li>
     </ul>
   </div>
@@ -134,6 +134,11 @@
           contact +='<div class="am-comment-bd">';
           contact +='<p>'+item.wenti+'</p>';
           contact +=' </div>';
+          if (item.image != null && item.image != "") {
+            contact += '<figure class="am-thumbnail">';
+            contact += '<img id="img"src="http://lhdx-contact.stor.sinaapp.com/' + item.image + '" alt=""/>';
+            contact += '</figure>';
+          }
           contact +=' <footer class="am-comment-footer">';
           contact +='<div class="am-comment-actions">';
           if(item.flag=='未处理'){
@@ -146,7 +151,7 @@
           if(item.flag =='已解决'){
             contact +='<a href="javascript:void(0)" onclick="initRepContact('+item.id+')">';
             contact +='<i class="am-icon-comment-o"></i>';
-            contact +='评价';
+            contact +='对本次服务评价';
             contact +='</a>';
           }
           contact +='</footer>';

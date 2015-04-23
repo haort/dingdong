@@ -1,52 +1,73 @@
-jQuery.validator.addMethod('mRequired', function(value,element) {
-  $(element).parent('.am-form-group').find('.am-alert').hide();
-  if(value == null||value==""){
-    var $group = $(element).parent();
-    var $alert = $group.find('.am-alert');
-    // 使用自定义的提示信息 或 插件内置的提示信息
-    var msg = $(element).data('validationMessage')||'请填写相关信息';
+jQuery.validator.addMethod('mRequired', function (value, element) {
+    $(element).parent('.am-form-group').find('.am-alert').hide();
+    if (value == null || value == "") {
+        var $group = $(element).parent();
+        var $alert = $group.find('.am-alert');
+        // 使用自定义的提示信息 或 插件内置的提示信息
+        var msg = $(element).data('validationMessage') || '请填写相关信息';
 
-    if (!$alert.length) {
-      $alert = $('<div class="am-alert am-alert-danger"></div>').hide().
-          appendTo($group);
+        if (!$alert.length) {
+            $alert = $('<div class="am-alert am-alert-danger"></div>').hide().
+                appendTo($group);
+        }
+
+        $alert.html(msg).show();
+        return false;
+    } else {
+        return true;
     }
-
-    $alert.html(msg).show();
-    return false;
-  }else{
-    return true ;
-  }
 }, "");
 
-jQuery.validator.addMethod('phoneRequired', function(value,element) {
-  $(element).parent('.am-form-group').find('.am-alert').hide();
-  if(value == null||value==""){
-    var $group = $(element).parent();
-    var $alert = $group.find('.am-alert');
-    // 使用自定义的提示信息 或 插件内置的提示信息
-    var msg = $(element).data('validationMessage')||'请填写相关信息';
+jQuery.validator.addMethod('phoneRequired', function (value, element) {
+    $(element).parent('.am-form-group').find('.am-alert').hide();
+    if (value == null || value == "") {
+        var $group = $(element).parent();
+        var $alert = $group.find('.am-alert');
+        // 使用自定义的提示信息 或 插件内置的提示信息
+        var msg = $(element).data('validationMessage') || '请填写相关信息';
 
-    if (!$alert.length) {
-      $alert = $('<div class="am-alert am-alert-danger"></div>').hide().
-          appendTo($group);
+        if (!$alert.length) {
+            $alert = $('<div class="am-alert am-alert-danger"></div>').hide().
+                appendTo($group);
+        }
+
+        $alert.html(msg).show();
+        return false;
+    } else if (value.length != 11) {
+        var $group = $(element).parent();
+        var $alert = $group.find('.am-alert');
+        // 使用自定义的提示信息 或 插件内置的提示信息
+        var msg = '请填写11位手机号码';
+
+        if (!$alert.length) {
+            $alert = $('<div class="am-alert am-alert-danger"></div>').hide().
+                appendTo($group);
+        }
+
+        $alert.html(msg).show();
+        return false;
+    } else {
+        return true;
     }
-
-    $alert.html(msg).show();
-    return false;
-  }else if(value.length != 11){
-    var $group = $(element).parent();
-    var $alert = $group.find('.am-alert');
-    // 使用自定义的提示信息 或 插件内置的提示信息
-    var msg = '请填写11位手机号码';
-
-    if (!$alert.length) {
-      $alert = $('<div class="am-alert am-alert-danger"></div>').hide().
-          appendTo($group);
-    }
-
-    $alert.html(msg).show();
-    return false;
-  }else {
-    return true;
-  }
 }, "");
+
+
+function custRoud(num,v) {
+    var vv = Math.pow(10, v);
+    return Math.round(num * vv) / vv;
+}
+
+function onBridgeReady(){
+    WeixinJSBridge.call('hideOptionMenu');
+}
+
+if (typeof WeixinJSBridge == "undefined"){
+    if( document.addEventListener ){
+        document.addEventListener('WeixinJSBridgeReady', onBridgeReady, false);
+    }else if (document.attachEvent){
+        document.attachEvent('WeixinJSBridgeReady', onBridgeReady);
+        document.attachEvent('onWeixinJSBridgeReady', onBridgeReady);
+    }
+}else{
+    onBridgeReady();
+}

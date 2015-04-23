@@ -6,7 +6,7 @@ package com.lhdx.www.server.model;
 public class PorderInfo {
     String productPic;
     String productName;
-    String  createTime;
+    String createTime;
     String num;
 
     public String getProductPic() {

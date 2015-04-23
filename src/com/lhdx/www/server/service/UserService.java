@@ -5,12 +5,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
 import com.lhdx.www.server.dao.ContactDao;
 import com.lhdx.www.server.dao.PorderDao;
+import com.lhdx.www.server.model.XiaoquUsers;
 import org.springframework.stereotype.Service;
 
 import com.lhdx.www.server.dao.UserDao;
@@ -139,5 +141,14 @@ public class UserService {
 			map.put("fk", contactDao.selectContactsById(user.getWxId()).size());
 		}
 		return map;
+	}
+
+	public List<XiaoquUsers> findXiaoquUsers(String wxId){
+		User u = userDao.findUserByWxId(wxId);
+		if(u!=null&&u.getComment()!=null&&"admin".equals(u.getComment())){
+			return userDao.selectXiaoquUsers();
+		}else{
+			return null;
+		}
 	}
 }

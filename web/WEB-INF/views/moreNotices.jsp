@@ -53,6 +53,11 @@
           notices += '<main class="am-panel-bd">';
           notices += item.xiaoqu+'<p>'+item.description+'</p>';
           notices += '</main>';
+          if (item.image != null && item.image != "") {
+            notices += '<figure class="am-thumbnail">';
+            notices += '<img id="img"src="http://lhdx-notice.stor.sinaapp.com/' + item.image + '" alt=""/>';
+            notices += '</figure>';
+          }
           notices += '<footer class="am-panel-footer">发表于：<p>'+item.createTime+'</p></footer>';
         });
 

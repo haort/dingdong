@@ -57,4 +57,11 @@ public class ProductController {
 		return productService.findPorderInfos(u.getWxId());
 	}
 
+	@RequestMapping(value = "/getPorderDetails",method = RequestMethod.POST)
+	public @ResponseBody
+	List getPorderDetails(HttpSession httpSession) {
+		User u = (User) httpSession.getAttribute("user");
+		return productService.findPorderDetailInfos(u.getWxId());
+	}
+
 }

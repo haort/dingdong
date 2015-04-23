@@ -13,6 +13,7 @@
   <meta http-equiv="Cache-Control" content="no-siteapp" />
   <%@include file="common/css.jsp"%>
   <%@include file="common/js.jsp"%>
+  <script src="<%=request.getContextPath()%>/assets/js/jquery.form.js"></script>
 </head>
 <body>
 <!-- Header start-->
@@ -34,7 +35,7 @@
     <a href="<%=request.getContextPath()%>/service/getCkcontact2.do" class="">历史反馈 &raquo;</a>
   </nav>
 </div>
-<form class="am-form" id="contactForm">
+<form class="am-form" id="contactForm" method="post" enctype="multipart/form-data"  action="<%=request.getContextPath()%>/service/addNewContact.do">
   <fieldset>
     <div class="am-form-group">
       <label for="doc-name">您的姓名</label>
@@ -57,6 +58,15 @@
       <textarea class="mRequired" rows="5" name="wenti" id="doc-wenti" placeholder="请输入问题说明" data-validation-message="请输入问题说明"></textarea>
     </div>
 
+    <div class="am-form-group am-form-file">
+      <label for="uploadImage">可上传一张小于2M图片</label>
+      <button type="button" id ="uploadImage"class="am-btn am-btn-default am-btn-sm">
+        <i class="am-icon-cloud-upload"></i>选择图片
+      </button>
+      <input id="contactImage" name="contactImage" type="file">
+    </div>
+    <div id="file-list"></div>
+
     <p><button type="submit" id="okBtn"class="am-btn am-btn-primary">提交</button></p>
   </fieldset>
 </form>
@@ -72,7 +82,42 @@
     </div>
   </div>
 </div>
+
+<div class="am-modal am-modal-alert" tabindex="-1" id="imageAlert">
+<div class="am-modal-dialog">
+  <div class="am-modal-hd">友情提示</div>
+  <div class="am-modal-bd">
+    只能上传图片文件！
+  </div>
+  <div class="am-modal-footer">
+    <span class="am-modal-btn">确定</span>
+  </div>
+</div>
+</div>
+
+<div class="am-modal am-modal-alert" tabindex="-1" id="fileSizeAlert">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">友情提示</div>
+    <div class="am-modal-bd">
+      图片大于2M！
+    </div>
+    <div class="am-modal-footer">
+      <span class="am-modal-btn">确定</span>
+    </div>
+  </div>
+</div>
+
 <!--alert end-->
+<!--loading start-->
+<div class="am-modal am-modal-loading am-modal-no-btn" tabindex="-1" id="loading">
+  <div class="am-modal-dialog">
+    <div class="am-modal-hd">正在提交...</div>
+    <div class="am-modal-bd">
+      <span class="am-icon-spinner am-icon-spin"></span>
+    </div>
+  </div>
+</div>
+<!--loading end-->
 <!--content end-->
 
 
@@ -81,30 +126,57 @@
 <!-- Navbar end-->
 
 <script>
-
   $(function() {
-    $('#contactForm').validate( {
-      submitHandler : function(form) {
-        var formData = $("#contactForm").serialize();
-        $.ajax( {
-          type : "POST",
-          url : "<%=request.getContextPath()%>/service/addNewContact.do",
-          cache : false,
-          data : formData,
-          success : onSuccess
-        });
-
-      },
-      errorPlacement:function(error,element){
-
-      }
+    $('#contactImage').on('change', function () {
+      var fileNames = '';
+      $.each(this.files, function () {
+        var fileName = this.name;
+        var extStart = fileName.lastIndexOf(".");
+        var ext = fileName.substring(extStart, fileName.length).toUpperCase();
+        if (ext != ".BMP" && ext != ".PNG" && ext != ".GIF" && ext != ".JPG" && ext != ".JPEG") {
+          $('#imageAlert').modal();
+          return false;
+        }
+        var fileSize = custRoud(this.size/1000/1000,2);
+        if(fileSize >2){
+          $('#fileSizeAlert').modal();
+          return false;
+        }
+        fileNames += '<span class="am-badge">' + this.name +':'+fileSize+ 'M</span> ';
+      });
+      $('#file-list').html(fileNames);
     });
 
-    function onSuccess(data, status) {
-      $('#malert').modal();
-      $('#contactForm')[0].reset();
+    function showRequest() {
+      var isSuccess = $("#contactForm").validate().form();
+      return isSuccess;
     }
 
+    function onSuccess(data, status) {
+
+      if (data.isAddSucessed == true) {
+        $('#loading').modal('close');
+        $('#malert').modal();
+        $('#contactForm')[0].reset();
+        $('#file-list').html('');
+      }else{
+        $('#loading').modal('close');
+        alert('反馈失败');
+        $('#contactForm')[0].reset();
+        $('#file-list').html('');
+      }
+    }
+
+    var options = {
+      beforeSubmit: showRequest,
+      success: onSuccess
+    };
+
+    $('#contactForm').submit(function () {
+      $(this).ajaxSubmit(options);
+      $('#loading').modal();
+      return false;
+    });
 
   });
 

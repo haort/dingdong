@@ -7,15 +7,12 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import com.lhdx.www.server.model.PorderInfo;
+import com.lhdx.www.server.model.*;
 import org.springframework.stereotype.Service;
 
 import com.lhdx.www.server.dao.PorderDao;
 import com.lhdx.www.server.dao.ProductDao;
 import com.lhdx.www.server.dao.UserDao;
-import com.lhdx.www.server.model.Porder;
-import com.lhdx.www.server.model.Product;
-import com.lhdx.www.server.model.User;
 import com.lhdx.www.server.util.DataFormat;
 
 @Service("productService")
@@ -83,5 +80,14 @@ public class ProductService {
 
 	public List<PorderInfo> findPorderInfos(String wxId){
 		return porderDao.findPorders(wxId);
+	}
+
+	public List<PorderDetailInfo> findPorderDetailInfos(String wxId){
+		User u = userDao.findUserByWxId(wxId);
+		if(u!=null&&u.getComment()!=null&&"admin".equals(u.getComment())){
+			return porderDao.findPorderDetails();
+		}else{
+			return null;
+		}
 	}
 }

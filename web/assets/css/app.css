@@ -1,1 +1,22 @@
 /* Write your styles */
+/* file field */
+.am-form-file {
+    position: relative;
+    overflow: hidden;
+}
+.am-form-file input[type="file"] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    opacity: 0;
+    cursor: pointer;
+    font-size: 50rem;
+}
+.am-list-item-text-3line {
+    line-height: 2.1;
+    font-size: 1.3rem;
+    color: #999999;
+    margin: 0;
+}

@@ -17,6 +17,25 @@ public class User implements Serializable {
 	private String birthday;
 	private String jfDate;
 	private int jf;
+	private String headimgurl;
+
+	public String getHeadimgurl() {
+		return headimgurl;
+	}
+
+	public void setHeadimgurl(String headimgurl) {
+		this.headimgurl = headimgurl;
+	}
+
+	public String getNickName() {
+		return nickName;
+	}
+
+	public void setNickName(String nickName) {
+		this.nickName = nickName;
+	}
+
+	private String nickName;
 	public String getBirthday() {
 		return birthday;
 	}

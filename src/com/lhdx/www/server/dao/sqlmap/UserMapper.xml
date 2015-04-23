@@ -27,9 +27,16 @@
 	   from user
 	   where wxId = #{wxId}
 	   and auth = 'admin'
-	</select> 
-	
-	
+	</select>
+
+	<select id="selectXiaoquUsers" parameterType="java.util.HashMap"   resultMap="xiaoquUsersMap"  >
+		select xiaoqu,count(id) allUserNum,count(case when name is not null then id else null end) namedUserNum,count(case when auth ="admin1" then id else null end) adminNum
+		from user
+		group by xiaoqu
+		order by xiaoqu;
+	</select>
+
+
 	<update id="updateUser" parameterType="java.util.HashMap">
 		update user set
 		auth = #{auth}
@@ -67,6 +74,20 @@
 		jfDate = #{jfDate}
 		where id = #{id}
     </update>
+
+	<update id="updateUserNickNameAndHead" parameterType="java.util.HashMap">
+		update user set
+		nickName = #{user.nickName},
+		headimgurl = #{user.headimgurl}
+		where id = #{user.id}
+	</update>
+
+	<resultMap type="XiaoquUsers" id="xiaoquUsersMap">
+		<result property="xiaoqu" column="xiaoqu"/>
+		<result property="allUserNum" column="allUserNum" jdbcType="NUMERIC"/>
+		<result property="namedUserNum" column="namedUserNum" jdbcType="NUMERIC"/>
+		<result property="adminNum" column="adminNum" jdbcType="NUMERIC"/>
+	</resultMap>
 	
 	<resultMap type="User" id="userMap">
 		<id property="id" column="id" />
@@ -81,7 +102,8 @@
 		<result property="birthday" column="birthday" />
 		<result property="jfDate" column="jfDate" />
 		<result property="jf" column="jf" />
-		
+		<result property="headimgurl" column="headimgurl" />
+		<result property="nickName" column="nickName" />
 	</resultMap>
 	
 </mapper>

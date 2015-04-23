@@ -42,7 +42,7 @@ public class NoticeService {
 		}
 	}
 
-	public Map insertNotice2(String title, String description, String createUser) {
+	public Map insertNotice2(String title, String description, String createUser,String image) {
 		Map<String,Boolean> map = new HashMap<String, Boolean>();
 		User u = userDao.findUserByWxId(createUser);
 		if (u != null&&"admin1".equals(u.getAuth())) {
@@ -52,6 +52,7 @@ public class NoticeService {
 			c.setCreateUser(createUser);
 			c.setXiaoqu(u.getXiaoqu());
 			c.setCreateTime(DataFormat.formatDate(new Date()));
+			c.setImage(image);
 			noticeDao.addNotice(c);
 			map.put("isAddSucessed",true);
 		}else{

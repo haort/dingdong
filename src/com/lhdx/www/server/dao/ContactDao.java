@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.lhdx.www.server.model.ContactsInfo;
 import org.springframework.stereotype.Component;
 
 import com.lhdx.www.server.model.Contact;
@@ -17,7 +18,8 @@ public class ContactDao extends BaseDao {
 	private static final String UPDATECONTACTBYID = ".updateContactById";
 	private static final String REPLYCONTACTBYID = ".replyContactById";
 	private static final String SELECTCONTACTSBYADMIN = ".selectContactsByAdmin";
-	
+	private static final String SELECTCONTACTSINFO = ".selectContactsInfo";
+
 	public void addContact(Contact u){
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("contact", u);
@@ -50,5 +52,9 @@ public class ContactDao extends BaseDao {
 		map.put("id", id);
 		map.put("rep", rep);
 		sqlSession.update(NAMESPACE+REPLYCONTACTBYID, map);
+	}
+
+	public List<ContactsInfo> selectContactsInfo(){
+		return sqlSession.selectList(NAMESPACE+SELECTCONTACTSINFO);
 	}
 }

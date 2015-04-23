@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.lhdx.www.server.model.XiaoquUsers;
 import org.springframework.stereotype.Component;
 
 import com.lhdx.www.server.model.User;
@@ -20,7 +21,8 @@ public class UserDao extends BaseDao {
 	private static final String UPDATEUSERINFO2 = ".updateUserInfo2";
 	private static final String UPDATEUSERXIAOQU = ".updateUserXiaoqu";
 	private static final String UPDATEJF = ".updateJf";
-	
+	private static final String SELECTXIAOQUUSERS = ".selectXiaoquUsers";
+
 	
 	public void addUser(User u){
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -76,5 +78,9 @@ public class UserDao extends BaseDao {
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("user", u);
 		sqlSession.update(NAMESPACE+UPDATEUSERINFO2, map);
+	}
+
+	public List<XiaoquUsers> selectXiaoquUsers(){
+		return sqlSession.selectList(NAMESPACE+SELECTXIAOQUUSERS);
 	}
 }

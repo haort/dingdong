@@ -57,6 +57,11 @@
                     var notice = '<main class="am-panel-bd">';
                     notice += data.xiaoqu + '<p>' + data.description + '</p>';
                     notice += '</main>';
+                    if (data.image != null && data.image != "") {
+                        notice += '<figure class="am-thumbnail">';
+                        notice += '<img id="img"src="http://lhdx-notice.stor.sinaapp.com/' + data.image + '" alt=""/>';
+                        notice += '</figure>';
+                    }
                     notice += '<footer class="am-panel-footer">发表于：<p>' + data.createTime + '</p></footer>';
 
                     $("#notice").html(notice);

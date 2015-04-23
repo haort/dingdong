@@ -135,14 +135,21 @@
                     contact += '<div class="am-comment-main">';
                     contact += '<header class="am-comment-hd">';
                     contact += '<div class="am-comment-meta">';
-                    contact += '<a href="tel:'+item.phone+'" class="am-comment-author">' + item.name + '</a>(' + item.createTime + ')';
+                    contact += '<a href="tel:'+item.phone+'" class="am-comment-author">' + item.name +'</a>(' + item.createTime + ')';
                     contact += '</div>';
                     contact += '</header>';
                     contact += '<div class="am-comment-bd">';
                     contact += '<p>' + item.wenti + '</p>';
                     contact += ' </div>';
+                    if (item.image != null && item.image != "") {
+                        contact += '<figure class="am-thumbnail">';
+                        contact += '<img id="img"src="http://lhdx-contact.stor.sinaapp.com/' + item.image + '" alt=""/>';
+                        contact += '</figure>';
+                    }
                     contact += ' <footer class="am-comment-footer">';
                     contact += '<div class="am-comment-actions" id="flag"'+item.id+'>';
+                    contact += '<span>号码：' + item.phone + '</span></br>';
+                    contact += '<span>地址：' + item.addr + '</span></br>';
                     if (item.flag == '未处理') {
                         contact += '<span class="am-badge am-radius">' + item.flag + '</span>';
                     } else if (item.flag == '处理中') {
@@ -150,7 +157,7 @@
                     }
                     contact += '<a href="javascript:void(0)" onclick="initRepContact(' + item.id+',\''+item.flag + '\')">';
                     contact += '<i class="am-icon-comment-o"></i>';
-                    contact += '处理反馈';
+                    contact += '点此处理反馈';
                     contact += '</a>';
                     contact += '</footer>';
                     contact += '</div>';

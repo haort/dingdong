@@ -5,19 +5,19 @@
 
 	<insert id="addNotice" parameterType="java.util.HashMap">
 		insert into
-		notice( title, description, createTime, createUser, xiaoqu) values
-		(#{notice.title},#{notice.description},#{notice.createTime},#{notice.createUser},#{notice.xiaoqu})
+		notice( title, description, createTime, createUser, xiaoqu,image) values
+		(#{notice.title},#{notice.description},#{notice.createTime},#{notice.createUser},#{notice.xiaoqu},#{notice.image})
 	</insert>
 	
 	<select id="selectNoticeByXiaoqu" parameterType="java.util.HashMap"   resultMap="noticeMap"  >
-	   select title, description, createTime, xiaoqu
+	   select title, description, createTime, xiaoqu,image
 	   from notice
 	   where xiaoqu = #{xiaoqu}
 	   order by id desc limit 0,1 ;
 	</select> 
 	
 	<select id="selectNoticesByXiaoqu" parameterType="java.util.HashMap"   resultMap="noticeMap"  >
-	   select title, description, createTime, xiaoqu
+	   select title, description, createTime, xiaoqu,image
 	   from notice
 	   where xiaoqu = #{xiaoqu}
 	   order by id desc
@@ -30,6 +30,7 @@
 		<result property="createTime" column="createTime" />
 		<result property="createUser" column="createUser" />
 		<result property="xiaoqu" column="xiaoqu" />
+		<result property="image" column="image" />
 	</resultMap>
 	
 </mapper>

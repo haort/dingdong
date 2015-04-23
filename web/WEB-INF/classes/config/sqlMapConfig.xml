@@ -31,6 +31,10 @@
 		<typeAlias alias="Product" type="com.lhdx.www.server.model.Product" />
 		<typeAlias alias="Porder" type="com.lhdx.www.server.model.Porder" />
 		<typeAlias alias="PorderInfo" type="com.lhdx.www.server.model.PorderInfo" />
+		<typeAlias alias="PorderDetailInfo" type="com.lhdx.www.server.model.PorderDetailInfo" />
+		<typeAlias alias="Hd" type="com.lhdx.www.server.model.Hd" />
+		<typeAlias alias="XiaoquUsers" type="com.lhdx.www.server.model.XiaoquUsers" />
+		<typeAlias alias="ContactsInfo" type="com.lhdx.www.server.model.ContactsInfo" />
 	</typeAliases>
 	<mappers>
 		<mapper resource="com/lhdx/www/server/dao/sqlmap/UserMapper.xml" />
@@ -39,5 +43,6 @@
 		<mapper resource="com/lhdx/www/server/dao/sqlmap/DcMapper.xml" />
 		<mapper resource="com/lhdx/www/server/dao/sqlmap/ProductMapper.xml" />
 		<mapper resource="com/lhdx/www/server/dao/sqlmap/PorderMapper.xml" />
+		<mapper resource="com/lhdx/www/server/dao/sqlmap/HdMapper.xml" />
 	</mappers>
 </configuration>

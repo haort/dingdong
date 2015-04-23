@@ -9,33 +9,36 @@
       <ul class="am-menu-nav sm-block-grid-1">
         <li class="am-nav-header">我的信息</li>
         <li class="">
-          <a href="<%=request.getContextPath()%>/service/getUserView.do">个人中心</a>
+          <a href="<%=request.getContextPath()%>/service/getUserView.do" class="am-icon-angle-right">个人中心</a>
         </li>
         <li class="">
-          <a href="<%=request.getContextPath()%>/service/getUpdateUserView.do">更新信息</a>
+          <a href="<%=request.getContextPath()%>/service/getUpdateUserView.do" class="am-icon-angle-right">更新信息</a>
         </li>
         <li class="am-nav-header">积分相关</li>
         <li class="">
-          <a href="<%=request.getContextPath()%>/service/getQd2.do">积分签到</a>
+          <a href="<%=request.getContextPath()%>/service/getQd2.do" class="am-icon-angle-right">积分签到</a>
         </li>
         <li class="">
-          <a href="<%=request.getContextPath()%>/service/getJfsc2.do">积分商城</a>
+          <a href="<%=request.getContextPath()%>/service/getJfsc2.do" class="am-icon-angle-right">积分商城</a>
         </li>
         <li class="">
-          <a href="<%=request.getContextPath()%>/service/getPorderView.do">已兑礼品</a>
+          <a href="<%=request.getContextPath()%>/service/getPorderView.do" class="am-icon-angle-right">已兑礼品</a>
         </li>
         <li class="am-nav-header">我的物业</li>
         <li class="">
-          <a href="<%=request.getContextPath()%>/service/getNotice2.do">最新公告</a>
+          <a href="<%=request.getContextPath()%>/service/getNotice2.do" class="am-icon-angle-right">最新公告</a>
         </li>
         <li class="">
-          <a href="<%=request.getContextPath()%>/service/getMoreNotices2.do">历史公告</a>
+          <a href="<%=request.getContextPath()%>/service/getMoreNotices2.do" class="am-icon-angle-right">历史公告</a>
         </li>
         <li class="">
-          <a href="<%=request.getContextPath()%>/service/getContact2.do">问题反馈</a>
+          <a href="<%=request.getContextPath()%>/service/getContact2.do" class="am-icon-angle-right">问题反馈</a>
         </li>
         <li class="">
-          <a href="<%=request.getContextPath()%>/service/getCkcontact2.do">历史反馈</a>
+          <a href="<%=request.getContextPath()%>/service/getCkcontact2.do" class="am-icon-angle-right">历史反馈</a>
+        </li>
+        <li class="">
+          <a href="<%=request.getContextPath()%>/service/getContactQQ.do" class="am-icon-angle-right">技术支持</a>
         </li>
       </ul>
     </div>

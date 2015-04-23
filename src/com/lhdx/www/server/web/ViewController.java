@@ -45,10 +45,10 @@ public class ViewController {
 						if(u.getAuth()!=null&&"admin1".equals(u.getAuth())){
 							mv.setViewName("adnotice");
 						}else{
-							mv.setViewName("qd");
+							mv.setViewName("user");
 						}
 					}else{
-						mv.setViewName("qd");
+						mv.setViewName("user");
 					}
 				}else{
 					mv.setViewName("reg");
@@ -189,4 +189,50 @@ public class ViewController {
 		return mv;
 	}
 
+	@RequestMapping(value = "/getContactQQ", method = RequestMethod.GET)
+	public ModelAndView getContactQQ(HttpSession httpSession) {
+		ModelAndView mv = new ModelAndView();
+		User u = (User) httpSession.getAttribute("user");
+		if(u.getComment() !=null&&"admin".equals(u.getComment())){
+			mv.setViewName("administrator");
+		}else{
+			mv.setViewName("contactQQ");
+		}
+		return mv;
+	}
+
+	@RequestMapping(value = "/getImage", method = RequestMethod.GET)
+	public ModelAndView getImage(HttpSession httpSession) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("adnotice1");
+		return mv;
+	}
+
+	@RequestMapping(value = "/getHd", method = RequestMethod.GET)
+	public ModelAndView getHd(HttpSession httpSession) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("hd");
+		return mv;
+	}
+
+	@RequestMapping(value = "/getHdOrders", method = RequestMethod.GET)
+	public ModelAndView getHdOrders(HttpSession httpSession) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("Hdorder");
+		return mv;
+	}
+
+	@RequestMapping(value = "/getAdministrator", method = RequestMethod.GET)
+	public ModelAndView getAdministrator(HttpSession httpSession) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("administrator");
+		return mv;
+	}
+
+	@RequestMapping(value = "/getHdMs", method = RequestMethod.GET)
+	public ModelAndView getHdMs(HttpSession httpSession) {
+		ModelAndView mv = new ModelAndView();
+		mv.setViewName("hd/hdMs");
+		return mv;
+	}
 }
